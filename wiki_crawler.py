@@ -82,7 +82,7 @@ def get_random_page_title() -> str | None:
     logger.error("Failed to get random page title.")
     return None
 
-def extract_links(page_title: str) -> list[str]:
+def extract_links(page_title: str) -> list[str] | int:
     """
     Extracts the links from a Wikipedia page.
 
@@ -129,13 +129,28 @@ def extract_links(page_title: str) -> list[str]:
                         if "#" in href:
                             href = href.split("#")[0]
                         links.append(href)
+
+            if links == []:
+                logger.warning("No links found in %s.", url)
+                with open(PATH / "dead_ends.json", "r", encoding="UTF-8") as file:
+                    portalocker.lock(file, portalocker.LOCK_EX)
+                    data = json.load(file)
+                    portalocker.unlock(file)
+
+                if url not in data["dead_ends"]:
+                    data["dead_ends"].append(url)
+
+                with open(PATH / "dead_ends.json", "w", encoding="UTF-8") as file:
+                    json.dump(data, file, indent=4)
+                    portalocker.unlock(file)
+                return 0
             return links
 
     logger.error("Failed to extract links from %s.", url)
-    return None
+    return 1
 
 
-def crawl(start_title: str, end_titles: list[str]) -> None:
+def crawl(start_title: str, end_titles: list[str]) -> None | int:
     """
     Crawls from the start title to the end title.
 
@@ -178,8 +193,36 @@ def crawl(start_title: str, end_titles: list[str]) -> None:
         )
         padding = 14 + len(end_titles) + len(path) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
 
-        while not (links := extract_links(path[-1])):
-            pass
+        if (links := extract_links(path[-1])) == 0:
+            if q.empty():
+                logger.error("-----------------------------------------"
+                             "\n                                    "
+                             "No more links to search."
+                             "\n                                    "
+                             "Start title: %s"
+                             "\n                                    "
+                             "End titles: %s"
+                             "\n                                    "
+                             "Remaining end titles: %s"
+                             "\n                                    "
+                             "Articles searched: %s"
+                             "\n                                    "
+                             "Time taken: %s"
+                             "\n                                    "
+                             "-----------------------------------------",
+                             start_title,
+                             end_titles,
+                             remaining_ends,
+                             len(visited),
+                             timedelta(seconds=int(time.time() - start_time)),
+                )
+
+            print()
+            return 0
+        
+        elif links == 1:
+            continue
+        
         for link in links:
             q.put(path + (link,))
             if link in remaining_ends:
@@ -393,9 +436,13 @@ def setup_path(
                 json.dump(data, file, indent=4)
                 portalocker.unlock(file)
 
-            crawl(start_title, end_titles)
-            print(f"Crawl number {counter} complete.")
-            logger.info("Crawl number %s complete.", counter)
+            exit = crawl(start_title, end_titles)
+            if exit == 0:
+                print(f"Crawl number {counter} failed.")
+                logger.info("Crawl number %s failed.", counter)
+            else:
+                print(f"Crawl number {counter} complete.")
+                logger.info("Crawl number %s complete.", counter)
             print("\n")
 
 
@@ -420,9 +467,13 @@ def setup_path(
                 "-----------------------------------------",
                 start_title, end_titles)
 
-            crawl(start_title, end_titles)
-            print(f"Crawl [{i + 1}/{iterations}] complete.")
-            logger.info("Crawl [%s/%s] complete.", i + 1, iterations)
+            exit = crawl(start_title, end_titles)
+            if exit == 0:
+                print(f"Crawl [{i + 1}/{iterations}] failed.")
+                logger.info("Crawl [%s/%s] failed.", i + 1, iterations)
+            else:
+                print(f"Crawl [{i + 1}/{iterations}] complete.")
+                logger.info("Crawl [%s/%s] complete.", i + 1, iterations)
             print("\n")
 
     else:
@@ -446,9 +497,13 @@ def setup_path(
                 "-----------------------------------------",
                 title, end_titles)
 
-            crawl(title, end_titles)
-            print(f"Crawl from {title} complete.")
-            logger.info("Crawl from %s complete.", title)
+            exit = crawl(start_title, end_titles)
+            if exit == 0:
+                print(f"Crawl from {title} failed.")
+                logger.info("Crawl from %s failed.", title)
+            else:
+                print(f"Crawl from {title} complete.")
+                logger.info("Crawl from %s complete.", title)
             print("\n")
 
 
