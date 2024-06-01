@@ -82,7 +82,7 @@ def get_random_page_title() -> str | None:
     logger.error("Failed to get random page title.")
     return None
 
-def extract_links(page_title: str) -> list[str] | None:
+def extract_links(page_title: str) -> list[str]:
     """
     Extracts the links from a Wikipedia page.
 
@@ -135,16 +135,13 @@ def extract_links(page_title: str) -> list[str] | None:
     return None
 
 
-def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
+def crawl(start_title: str, end_titles: list[str]) -> None:
     """
     Crawls from the start title to the end title.
 
     Args:
         start_title (str): The title of the start Wikipedia page.
         end_title (str): The title of the end Wikipedia page.
-
-    Returns:
-        dict[str, tuple[str]]: The path(s) from the start title to the end title.
     """
 
     start_time = time.time()
