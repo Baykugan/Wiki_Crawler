@@ -156,7 +156,7 @@ def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
 
     remaining_ends = end_titles.copy()
     longest_end_title = len(max(end_titles, key=len))
-    padding = 15 + len(end_titles) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
+    padding = 14 + len(end_titles) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
 
 
     print("\n" * padding + "\n", end="")
@@ -179,7 +179,7 @@ def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
                    longest_end_title,
                    padding
         )
-        padding = 15 + len(end_titles) + len(path) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
+        padding = 14 + len(end_titles) + len(path) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
 
         while not (links := extract_links(path[-1])):
             pass
@@ -289,8 +289,6 @@ def print_info(start_title: str,
     print(f"╞═╗ Current depth: {len(path) - 1}".ljust(line_length - 1) + "│")
     line_fill()
     print(ljust_ansi(f"│ ║ Current article: {wiki_link(path[-1])}", line_length - 1) + "│")
-    line_fill()
-    print("│ ║ Path:".ljust(line_length - 1) + "│")
     line_fill()
     print_info_path(path)
     line_fill()
