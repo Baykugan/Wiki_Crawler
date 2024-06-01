@@ -401,6 +401,7 @@ def setup_path(
             crawl(start_title, end_titles)
             print(f"Crawl number {counter} complete.")
             logger.info("Crawl number %s complete.", counter)
+            print("\n")
 
 
     elif start_titles is None:
