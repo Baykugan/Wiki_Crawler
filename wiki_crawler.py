@@ -325,7 +325,10 @@ def path_to_string(path: tuple[str]) -> str:
 
 
 def setup_path(
-    start_titles: list[str] = None, end_titles: list[str] = None, iterations: int = 1
+    start_titles: list[str] = None,
+    end_titles: list[str] = None,
+    iterations: int = 1,
+    continuous: bool = False,
 ) -> None:
     """
     Sets up the path from the start title to the end title.
@@ -337,11 +340,70 @@ def setup_path(
             - Default: ["Adolf_Hitler", "Jesus"]
         iterations (int): The number of iterations to crawl.
             - If start_title is None, iterations is the number of random start titles to crawl.
+        continuous (bool): Whether to crawl continously.
+            IF True, it will read from queue.json and crawl from the first value there.
+            If queue.json is empty, it will crawl from a random start title.
+            - Default: False
     """
 
     print("\n")
 
-    if start_titles is None:
+    if continuous:
+        counter = 0
+        print("Setting up continuous crawl.")
+        logger.info("Setting up continuous crawl.")
+        while True:
+            counter += 1
+            print(f"Crawl number {counter}.")
+            logger.info("Crawl number %s.", counter)
+            with open(PATH / "queue.json", "r", encoding="UTF-8") as file:
+                portalocker.lock(file, portalocker.LOCK_SH)
+                data = json.load(file)
+                portalocker.unlock(file)
+            if start_titles is not None:
+                data["queue"] = start_titles + data["queue"]
+                start_titles = None
+            if data["queue"] != []:
+                start_title = data["queue"].pop(0)
+                logger.info(
+                    "-----------------------------------------"
+                    "\n                                    "
+                    "Setting up crawl from queue."
+                    "\n                                    "
+                    "Start title: %s"
+                    "\n                                    "
+                    "End titles: %s"
+                    "\n                                    "
+                    "-----------------------------------------",
+                    start_title, end_titles
+                )
+
+            else:
+                start_title = get_random_page_title()
+                logger.info(
+                    "-----------------------------------------"
+                    "\n                                    "
+                    "Setting up crawl from random start title."
+                    "\n                                    "
+                    "Start title: %s"
+                    "\n                                    "
+                    "End titles: %s"
+                    "\n                                    "
+                    "-----------------------------------------",
+                    start_title, end_titles
+                )
+
+            with open(PATH / "queue.json", "w", encoding="UTF-8") as file:
+                portalocker.lock(file, portalocker.LOCK_EX)
+                json.dump(data, file, indent=4)
+                portalocker.unlock(file)
+
+            crawl(start_title, end_titles)
+            print(f"Crawl number {counter} complete.")
+            logger.info("Crawl number %s complete.", counter)
+
+
+    elif start_titles is None:
         logger.info("Setting up crawl(s) for %s random start titles.", iterations)
         for i in range(iterations):
 
@@ -463,7 +525,10 @@ def main() -> None:
     end_titles = []
 
     print("\033[2J")
-    while start_title := input("Enter start title: "):
+    if input("Crawl continuously? (y/n): ").lower() == "y":
+        continuous = True
+    
+    while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
     while end_title := input("Enter end title: "):
         end_titles.append(end_title)
@@ -483,7 +548,7 @@ def main() -> None:
                       "Jesus",
                       ]
 
-    setup_path(start_titles, end_titles, iterations)
+    setup_path(start_titles, end_titles, iterations, continuous)
 
 
 if __name__ == "__main__":
