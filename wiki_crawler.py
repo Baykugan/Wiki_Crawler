@@ -483,7 +483,6 @@ def main() -> None:
     else:
         end_titles = ["Adolf_Hitler",
                       "Jesus",
-                      "Napoleon",
                       ]
 
     setup_path(start_titles, end_titles, iterations)
