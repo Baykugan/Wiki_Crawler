@@ -530,6 +530,8 @@ def main() -> None:
     print("\033[2J")
     if input("Crawl continuously? (y/n): ").lower() == "y":
         continuous = True
+    else:
+        continuous = False
     
     while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
