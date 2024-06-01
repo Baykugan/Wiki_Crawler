@@ -189,13 +189,13 @@ def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
                 logger.info(
                     "-----------------------------------------"
                     "\n                                    "
-                    "End title found: %s"
+                    "%s found:"
                     "\n                                    "
                     "Path: %s"
                     "\n                                    "
                     "Articles searched: %s"
                     "\n                                    "
-                    "Time taken: %s seconds"
+                    "Time taken: %s"
                     "\n                                    "
                     "-----------------------------------------",
                     link, path + (link,), len(visited), timedelta(seconds=int(time.time() - start_time)))
@@ -346,21 +346,21 @@ def setup_path(
         for i in range(iterations):
 
             print(f"Crawl [{i + 1}/{iterations}].")
-            logger.info("Crawl number [%s/%s].", i + 1, iterations)
+            logger.info("Crawl [%s/%s].", i + 1, iterations)
             while not (start_title := get_random_page_title()):
                 pass
 
             logger.info(
                 "-----------------------------------------"
                 "\n                                    "
-                "Setting up crawl number [%s/%s]."
+                "Setting up crawl:"
                 "\n                                    "
-                "First random title: %s"
+                "Start title: %s"
                 "\n                                    "
                 "End titles: %s"
                 "\n                                    "
                 "-----------------------------------------",
-                i + 1, iterations, start_title, end_titles)
+                start_title, end_titles)
 
             crawl(start_title, end_titles)
             print(f"Crawl [{i + 1}/{iterations}] complete.")
@@ -379,7 +379,7 @@ def setup_path(
             logger.info(
                 "-----------------------------------------"
                 "\n                                    "
-                "Setting up crawl."
+                "Setting up crawl:"
                 "\n                                    "
                 "Start title: %s"
                 "\n                                    "
@@ -463,9 +463,9 @@ def main() -> None:
     end_titles = []
 
     print("\033[2J")
-    while start_title := input("Enter the start title: "):
+    while start_title := input("Enter start title: "):
         start_titles.append(start_title)
-    while end_title := input("Enter the end title: "):
+    while end_title := input("Enter end title: "):
         end_titles.append(end_title)
 
     if len(start_titles) > 0:
