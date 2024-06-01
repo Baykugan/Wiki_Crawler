@@ -286,17 +286,17 @@ def print_info(start_title: str,
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
-    print(f"│ Current depth: {len(path) - 1}".ljust(line_length - 1) + "│")
+    print(f"╞═╗ Current depth: {len(path) - 1}".ljust(line_length - 1) + "│")
     line_fill()
-    print(ljust_ansi(f"│ Current article: {wiki_link(path[-1])}", line_length - 1) + "│")
+    print(ljust_ansi(f"│ ║ Current article: {wiki_link(path[-1])}", line_length - 1) + "│")
     line_fill()
-    print("╞═╗ Path:".ljust(line_length - 1) + "│")
+    print("│ ║ Path:".ljust(line_length - 1) + "│")
     line_fill()
     print_info_path(path)
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
-    print("│ Paths:".ljust(line_length - 1) + "│")
+    print("│   Paths:".ljust(line_length - 1) + "│")
     counter = 0
     for key, value in paths.items():
         counter += 1
