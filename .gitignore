@@ -2,3 +2,4 @@
 \__pycache__
 .vscode
 wiki_crawler2.py
+queue.py
