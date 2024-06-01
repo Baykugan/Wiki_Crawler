@@ -238,7 +238,11 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                     "Time taken: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    link, path + (link,), len(visited), timedelta(seconds=int(time.time() - start_time)))
+                    link,
+                    path + (link,),
+                    len(visited),
+                    timedelta(seconds=int(time.time() - start_time))
+                )
                 
                 save_path(path + (link,))
                 remaining_ends.remove(link)
@@ -388,7 +392,7 @@ def setup_path(
 
     if continuous:
         counter = 0
-        print("Setting up continuous crawl.")
+        print("Setting up continuous crawl.\nPress Ctrl+C to stop.\n")
         logger.info("Setting up continuous crawl.")
         while True:
             counter += 1
@@ -413,7 +417,8 @@ def setup_path(
                     "End titles: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    start_title, end_titles
+                    start_title,
+                    end_titles
                 )
 
             else:
@@ -428,7 +433,8 @@ def setup_path(
                     "End titles: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    start_title, end_titles
+                    start_title,
+                    end_titles
                 )
 
             with open(PATH / "queue.json", "w", encoding="UTF-8") as file:
@@ -465,7 +471,9 @@ def setup_path(
                 "End titles: %s"
                 "\n                                    "
                 "-----------------------------------------",
-                start_title, end_titles)
+                start_title,
+                end_titles
+            )
 
             exit = crawl(start_title, end_titles)
             if exit == 0:
@@ -495,7 +503,9 @@ def setup_path(
                 "End titles: %s"
                 "\n                                    "
                 "-----------------------------------------",
-                title, end_titles)
+                title,
+                end_titles
+            )
 
             exit = crawl(start_title, end_titles)
             if exit == 0:
