@@ -374,8 +374,8 @@ def setup_path(
                     len(start_titles), start_titles)
 
         for title in start_titles:
-            print(f"Crawl for {title}.")
-            logger.info("Crawl for %s.", title)
+            print(f"Crawl from {title}.")
+            logger.info("Crawl from %s.", title)
             logger.info(
                 "-----------------------------------------"
                 "\n                                    "
@@ -389,8 +389,8 @@ def setup_path(
                 title, end_titles)
 
             crawl(title, end_titles)
-            print(f"Crawl for {title} complete.")
-            logger.info("Crawl for %s complete.", title)
+            print(f"Crawl from {title} complete.")
+            logger.info("Crawl from %s complete.", title)
             print("\n")
 
 
