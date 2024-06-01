@@ -199,6 +199,8 @@ def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
                     "\n                                    "
                     "-----------------------------------------",
                     link, path + (link,), len(visited), timedelta(seconds=int(time.time() - start_time)))
+                
+                save_path(path + (link,))
                 remaining_ends.remove(link)
                 paths[str(len(visited)) + " " + link] = path + (link,)
 
@@ -213,8 +215,6 @@ def crawl(start_title: str, end_titles: list[str]) -> dict[str, tuple[str]]:
                padding
     )
     print()
-
-    return paths
 
 
 def print_info(start_title: str,
@@ -362,7 +362,7 @@ def setup_path(
                 "-----------------------------------------",
                 i + 1, iterations, start_title, end_titles)
 
-            show_and_save_path(start_title, end_titles)
+            crawl(start_title, end_titles)
             print(f"Crawl [{i + 1}/{iterations}] complete.")
             logger.info("Crawl [%s/%s] complete.", i + 1, iterations)
             print("\n")
@@ -388,25 +388,11 @@ def setup_path(
                 "-----------------------------------------",
                 title, end_titles)
 
-            show_and_save_path(title, end_titles)
+            crawl(title, end_titles)
             print(f"Crawl for {title} complete.")
             logger.info("Crawl for %s complete.", title)
             print("\n")
 
-
-def show_and_save_path(start_title: str, end_titles: list[str]) -> None:
-    """
-    Shows and saves the path from the start title to the end title.
-
-    Args:
-        start_title (str): The title of the start Wikipedia page.
-        end_title (str): The title of the end Wikipedia page.
-    """
-
-    paths = crawl(start_title, end_titles)
-
-    for path in paths.values():
-        save_path(path)
 
 
 def wiki_link(title: str) -> str:
