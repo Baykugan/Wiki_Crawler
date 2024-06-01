@@ -502,7 +502,9 @@ def save_path(path: tuple[str]) -> None:
             k: v
             for k, v in sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
         }
-
+    else:
+        logger.info("Path already saved: %s", path)
+        return
     data[path[-1]][path_length][path[0]] = path
 
     logger.info("Path saved: %s", path)
