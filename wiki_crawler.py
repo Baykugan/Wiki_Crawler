@@ -216,9 +216,10 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                              len(visited),
                              timedelta(seconds=int(time.time() - start_time)),
                 )
-
-            print()
-            return 0
+                print()
+                return 0
+            
+            continue
         
         elif links == 1:
             continue
