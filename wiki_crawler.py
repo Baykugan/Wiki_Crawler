@@ -4,6 +4,8 @@ Wiki Crawler
 This script crawls from a start Wikipedia page to an end Wikipedia page.
 """
 
+#pylint: disable=line-too-long
+
 import json
 import pathlib
 import re
@@ -130,7 +132,7 @@ def extract_links(page_title: str) -> list[str] | int:
                             href = href.split("#")[0]
                         links.append(href)
 
-            if links == []:
+            if not links:
                 logger.warning("No links found in %s.", url)
                 with open(PATH / "dead_ends.json", "r", encoding="UTF-8") as file:
                     portalocker.lock(file, portalocker.LOCK_EX)
@@ -219,12 +221,12 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                 )
                 print()
                 return 0
-            
+
             continue
-        
+
         elif links == 1:
             continue
-        
+
         for link in links:
             q.put(path + (link,))
             if link in remaining_ends:
@@ -245,7 +247,7 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                     len(visited),
                     timedelta(seconds=int(time.time() - start_time)),
                 )
-                
+
                 save_path(path + (link,))
                 remaining_ends.remove(link)
                 paths[str(len(visited)) + " " + link] = path + (link,)
@@ -444,8 +446,8 @@ def setup_path(
                 json.dump(data, file, indent=4)
                 portalocker.unlock(file)
 
-            exit = crawl(start_title, end_titles)
-            if exit == 0:
+            exit_code = crawl(start_title, end_titles)
+            if exit_code == 0:
                 print(f"Crawl number {counter} failed.")
                 logger.info("Crawl number %s failed.", counter)
             else:
@@ -477,8 +479,8 @@ def setup_path(
                 wiki_link_log(end_titles),
             )
 
-            exit = crawl(start_title, end_titles)
-            if exit == 0:
+            exit_code = crawl(start_title, end_titles)
+            if exit_code == 0:
                 print(f"Crawl [{i + 1}/{iterations}] failed.")
                 logger.info("Crawl [%s/%s] failed.", i + 1, iterations)
             else:
@@ -509,8 +511,8 @@ def setup_path(
                 wiki_link_log(end_titles),
             )
 
-            exit = crawl(start_title, end_titles)
-            if exit == 0:
+            exit_code = crawl(start_title, end_titles)
+            if exit_code == 0:
                 print(f"Crawl from {start_title} failed.")
                 logger.info("Crawl from %s failed.", start_title)
             else:
@@ -612,7 +614,7 @@ def main() -> None:
         continuous = True
     else:
         continuous = False
-    
+
     while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
     while end_title := input("Enter end title: "):
