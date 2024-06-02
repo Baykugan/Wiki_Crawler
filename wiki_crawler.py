@@ -195,26 +195,27 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
 
         if (links := extract_links(path[-1])) == 0:
             if q.empty():
-                logger.error("-----------------------------------------"
-                             "\n                                    "
-                             "No more links to search."
-                             "\n                                    "
-                             "Start title: %s"
-                             "\n                                    "
-                             "End titles: %s"
-                             "\n                                    "
-                             "Remaining end titles: %s"
-                             "\n                                    "
-                             "Articles searched: %s"
-                             "\n                                    "
-                             "Time taken: %s"
-                             "\n                                    "
-                             "-----------------------------------------",
-                             start_title,
-                             end_titles,
-                             remaining_ends,
-                             len(visited),
-                             timedelta(seconds=int(time.time() - start_time)),
+                logger.error(
+                    "-----------------------------------------"
+                    "\n                                    "
+                    "No more links to search."
+                    "\n                                    "
+                    "Start title: %s"
+                    "\n                                    "
+                    "End titles: %s"
+                    "\n                                    "
+                    "Remaining end titles: %s"
+                    "\n                                    "
+                    "Articles searched: %s"
+                    "\n                                    "
+                    "Time taken: %s"
+                    "\n                                    "
+                    "-----------------------------------------",
+                    wiki_link_log((start_title,)),
+                    wiki_link_log(end_titles),
+                    wiki_link_log(remaining_ends),
+                    len(visited),
+                    timedelta(seconds=int(time.time() - start_time)),
                 )
                 print()
                 return 0
@@ -239,10 +240,10 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                     "Time taken: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    link,
-                    path + (link,),
+                    wiki_link_log((link,)),
+                    wiki_link_log(path + (link,)),
                     len(visited),
-                    timedelta(seconds=int(time.time() - start_time))
+                    timedelta(seconds=int(time.time() - start_time)),
                 )
                 
                 save_path(path + (link,))
@@ -418,8 +419,8 @@ def setup_path(
                     "End titles: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    start_title,
-                    end_titles
+                    wiki_link_log((start_title,)),
+                    wiki_link_log(end_titles),
                 )
 
             else:
@@ -434,8 +435,8 @@ def setup_path(
                     "End titles: %s"
                     "\n                                    "
                     "-----------------------------------------",
-                    start_title,
-                    end_titles
+                    wiki_link_log((start_title,)),
+                    wiki_link_log(end_titles),
                 )
 
             with open(PATH / "queue.json", "w", encoding="UTF-8") as file:
@@ -472,8 +473,8 @@ def setup_path(
                 "End titles: %s"
                 "\n                                    "
                 "-----------------------------------------",
-                start_title,
-                end_titles
+                wiki_link_log((start_title,)),
+                wiki_link_log(end_titles),
             )
 
             exit = crawl(start_title, end_titles)
@@ -491,9 +492,9 @@ def setup_path(
                     "%s",
                     len(start_titles), start_titles)
 
-        for title in start_titles:
-            print(f"Crawl from {title}.")
-            logger.info("Crawl from %s.", title)
+        for start_title in start_titles:
+            print(f"Crawl from {start_title}.")
+            logger.info("Crawl from %s.", start_title)
             logger.info(
                 "-----------------------------------------"
                 "\n                                    "
@@ -504,17 +505,17 @@ def setup_path(
                 "End titles: %s"
                 "\n                                    "
                 "-----------------------------------------",
-                title,
-                end_titles
+                wiki_link_log((start_title,)),
+                wiki_link_log(end_titles),
             )
 
             exit = crawl(start_title, end_titles)
             if exit == 0:
-                print(f"Crawl from {title} failed.")
-                logger.info("Crawl from %s failed.", title)
+                print(f"Crawl from {start_title} failed.")
+                logger.info("Crawl from %s failed.", start_title)
             else:
-                print(f"Crawl from {title} complete.")
-                logger.info("Crawl from %s complete.", title)
+                print(f"Crawl from {start_title} complete.")
+                logger.info("Crawl from %s complete.", start_title)
             print("\n")
 
 
@@ -532,6 +533,21 @@ def wiki_link(title: str) -> str:
 
     return f"\x1b]8;;https://en.wikipedia.org/wiki/{title}\x1b\\{title}\x1b]8;;\x1b\\"
 
+def wiki_link_log(path: list[str] | tuple[str]) -> str:
+    """
+    Returns the Wikipedia links for the path.
+
+    Args:
+        path (list[str] | tuple[str]): The path from the start title to the end title.
+
+    Returns:
+        str: The Wikipedia links for the path.
+    """
+
+    links = ["\n                                        " + f"https://en.wikipedia.org/wiki/{title}" for title in path]
+    link_str = "["+ ("".join(links)) + "\n                                    ]"
+
+    return link_str
 
 def save_path(path: tuple[str]) -> None:
     """
@@ -565,7 +581,10 @@ def save_path(path: tuple[str]) -> None:
             for k, v in sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
         }
     else:
-        logger.info("Path already saved: %s", path)
+        logger.info(
+            "Path already saved: %s",
+            wiki_link_log(path),
+        )
         return
     data[path[-1]][path_length][path[0]] = path
 
