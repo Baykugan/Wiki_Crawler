@@ -29,6 +29,10 @@
                 "Albert_Szent-Gy%C3%B6rgyi",
                 "Adolf_Hitler"
             ],
+            "Aleister_Crowley": [
+                "Aleister_Crowley",
+                "Adolf_Hitler"
+            ],
             "Alps": [
                 "Alps",
                 "Adolf_Hitler"
@@ -43,6 +47,10 @@
             ],
             "Arturo_Toscanini": [
                 "Arturo_Toscanini",
+                "Adolf_Hitler"
+            ],
+            "Aryan": [
+                "Aryan",
                 "Adolf_Hitler"
             ],
             "Astrology": [
@@ -77,6 +85,10 @@
                 "Bourgeoisie",
                 "Adolf_Hitler"
             ],
+            "Brenner_pass": [
+                "Brenner_pass",
+                "Adolf_Hitler"
+            ],
             "British_Library": [
                 "British_Library",
                 "Adolf_Hitler"
@@ -87,6 +99,10 @@
             ],
             "Canada_convoy_protest": [
                 "Canada_convoy_protest",
+                "Adolf_Hitler"
+            ],
+            "Carl_Jung": [
+                "Carl_Jung",
                 "Adolf_Hitler"
             ],
             "Carl_Linnaeus": [
@@ -165,6 +181,14 @@
                 "Entrepreneurship",
                 "Adolf_Hitler"
             ],
+            "Ernst_Kaltenbrunner": [
+                "Ernst_Kaltenbrunner",
+                "Adolf_Hitler"
+            ],
+            "Esperanto": [
+                "Esperanto",
+                "Adolf_Hitler"
+            ],
             "Europe": [
                 "Europe",
                 "Adolf_Hitler"
@@ -229,12 +253,20 @@
                 "Head_of_state",
                 "Adolf_Hitler"
             ],
+            "Hermann_Hesse": [
+                "Hermann_Hesse",
+                "Adolf_Hitler"
+            ],
             "Hindu_Rashtra": [
                 "Hindu_Rashtra",
                 "Adolf_Hitler"
             ],
             "Hindutva": [
                 "Hindutva",
+                "Adolf_Hitler"
+            ],
+            "Hip_hop_music": [
+                "Hip_hop_music",
                 "Adolf_Hitler"
             ],
             "Hirohito": [
@@ -253,6 +285,10 @@
                 "Isle_of_Wight",
                 "Adolf_Hitler"
             ],
+            "Japanese_Empire": [
+                "Japanese_Empire",
+                "Adolf_Hitler"
+            ],
             "Jews": [
                 "Jews",
                 "Adolf_Hitler"
@@ -263,6 +299,10 @@
             ],
             "Kurt_G%C3%B6del": [
                 "Kurt_G%C3%B6del",
+                "Adolf_Hitler"
+            ],
+            "List_of_Internet_phenomena": [
+                "List_of_Internet_phenomena",
                 "Adolf_Hitler"
             ],
             "List_of_Nobel_laureates": [
@@ -315,6 +355,10 @@
             ],
             "O._J._Simpson_murder_case": [
                 "O._J._Simpson_murder_case",
+                "Adolf_Hitler"
+            ],
+            "Oath": [
+                "Oath",
                 "Adolf_Hitler"
             ],
             "Parody": [
@@ -401,6 +445,10 @@
                 "Spanish_Civil_War",
                 "Adolf_Hitler"
             ],
+            "Sparta": [
+                "Sparta",
+                "Adolf_Hitler"
+            ],
             "Spike_Jones": [
                 "Spike_Jones",
                 "Adolf_Hitler"
@@ -415,6 +463,10 @@
             ],
             "Storting": [
                 "Storting",
+                "Adolf_Hitler"
+            ],
+            "Subhas_Chandra_Bose": [
+                "Subhas_Chandra_Bose",
                 "Adolf_Hitler"
             ],
             "Sworn": [
@@ -435,6 +487,10 @@
             ],
             "Twitter": [
                 "Twitter",
+                "Adolf_Hitler"
+            ],
+            "Twitter_(identifier)": [
+                "Twitter_(identifier)",
                 "Adolf_Hitler"
             ],
             "UNESCO": [
@@ -463,6 +519,10 @@
             ],
             "Walter_Reuther": [
                 "Walter_Reuther",
+                "Adolf_Hitler"
+            ],
+            "War": [
+                "War",
                 "Adolf_Hitler"
             ],
             "Warner_Brothers": [
@@ -585,6 +645,11 @@
                 "Georg_Solti",
                 "Adolf_Hitler"
             ],
+            "Allah": [
+                "Allah",
+                "Jews",
+                "Adolf_Hitler"
+            ],
             "American_English": [
                 "American_English",
                 "Gasoline",
@@ -603,6 +668,11 @@
             "Andrey_Vasilyevich_Fomochkin": [
                 "Andrey_Vasilyevich_Fomochkin",
                 "Soviet_Union",
+                "Adolf_Hitler"
+            ],
+            "Ascomycota": [
+                "Ascomycota",
+                "Cloning",
                 "Adolf_Hitler"
             ],
             "Association_football": [
@@ -630,9 +700,19 @@
                 "World_War_II",
                 "Adolf_Hitler"
             ],
+            "Bharata_(term)": [
+                "Bharata_(term)",
+                "Esperanto",
+                "Adolf_Hitler"
+            ],
             "Bhutan%E2%80%93China_relations": [
                 "Bhutan%E2%80%93China_relations",
                 "Cold_War",
+                "Adolf_Hitler"
+            ],
+            "Bitumen": [
+                "Bitumen",
+                "Croatia",
                 "Adolf_Hitler"
             ],
             "Bra_Boys_(film)": [
@@ -663,6 +743,11 @@
             "Bucharest,_Romania": [
                 "Bucharest,_Romania",
                 "Romania",
+                "Adolf_Hitler"
+            ],
+            "Buddha": [
+                "Buddha",
+                "Hermann_Hesse",
                 "Adolf_Hitler"
             ],
             "Bulgarian_language": [
@@ -723,6 +808,11 @@
             "Derivative": [
                 "Derivative",
                 "Fritz_John",
+                "Adolf_Hitler"
+            ],
+            "Deva_(Hinduism)": [
+                "Deva_(Hinduism)",
+                "War",
                 "Adolf_Hitler"
             ],
             "Discord": [
@@ -1015,6 +1105,16 @@
                 "Sworn",
                 "Adolf_Hitler"
             ],
+            "Justice": [
+                "Justice",
+                "Ernst_Kaltenbrunner",
+                "Adolf_Hitler"
+            ],
+            "Kali": [
+                "Kali",
+                "Feminism",
+                "Adolf_Hitler"
+            ],
             "Kankakee_River": [
                 "Kankakee_River",
                 "Native_Americans_in_the_United_States",
@@ -1025,6 +1125,11 @@
                 "Soviet_Union",
                 "Adolf_Hitler"
             ],
+            "Khmer_language": [
+                "Khmer_language",
+                "Berlin",
+                "Adolf_Hitler"
+            ],
             "Kontinental_Hockey_League": [
                 "Kontinental_Hockey_League",
                 "Europe",
@@ -1033,6 +1138,11 @@
             "Korean_language": [
                 "Korean_language",
                 "World_War_II",
+                "Adolf_Hitler"
+            ],
+            "Krishna": [
+                "Krishna",
+                "Aleister_Crowley",
                 "Adolf_Hitler"
             ],
             "Krom%C4%9B%C5%99%C3%AD%C5%BE_District": [
@@ -1100,6 +1210,16 @@
                 "Cabaret_(1972_film)",
                 "Adolf_Hitler"
             ],
+            "Mahabharata": [
+                "Mahabharata",
+                "Subhas_Chandra_Bose",
+                "Adolf_Hitler"
+            ],
+            "Mandodari": [
+                "Mandodari",
+                "Aryan",
+                "Adolf_Hitler"
+            ],
             "Marie_Sneve_Martinussen": [
                 "Marie_Sneve_Martinussen",
                 "Storting",
@@ -1163,6 +1283,11 @@
             "Motorcycle": [
                 "Motorcycle",
                 "Coventry",
+                "Adolf_Hitler"
+            ],
+            "Mountain_pass": [
+                "Mountain_pass",
+                "Brenner_pass",
                 "Adolf_Hitler"
             ],
             "Museo_Nacional_de_Arqueolog%C3%ADa_y_Etnolog%C3%ADa": [
@@ -1235,6 +1360,11 @@
                 "British_Library",
                 "Adolf_Hitler"
             ],
+            "Parvati": [
+                "Parvati",
+                "Aryan",
+                "Adolf_Hitler"
+            ],
             "Pashto": [
                 "Pashto",
                 "Amanullah_Khan",
@@ -1278,6 +1408,11 @@
             "Ponce,_Puerto_Rico": [
                 "Ponce,_Puerto_Rico",
                 "Entrepreneurs",
+                "Adolf_Hitler"
+            ],
+            "Post_Malone": [
+                "Post_Malone",
+                "Hip_hop_music",
                 "Adolf_Hitler"
             ],
             "Provence": [
@@ -1330,9 +1465,29 @@
                 "Europe",
                 "Adolf_Hitler"
             ],
+            "Ruma": [
+                "Ruma",
+                "Slavs",
+                "Adolf_Hitler"
+            ],
+            "Saraswati": [
+                "Saraswati",
+                "British_Library",
+                "Adolf_Hitler"
+            ],
+            "Sarmatians": [
+                "Sarmatians",
+                "Poland",
+                "Adolf_Hitler"
+            ],
             "Second_Boer_War": [
                 "Second_Boer_War",
                 "Scorched_earth",
+                "Adolf_Hitler"
+            ],
+            "Sesame_Street": [
+                "Sesame_Street",
+                "The_New_York_Times",
                 "Adolf_Hitler"
             ],
             "Seychelles": [
@@ -1348,6 +1503,11 @@
             "Shinkansen": [
                 "Shinkansen",
                 "World_War_II",
+                "Adolf_Hitler"
+            ],
+            "Shinto": [
+                "Shinto",
+                "Japanese_Empire",
                 "Adolf_Hitler"
             ],
             "Simplified_Chinese_characters": [
@@ -1425,6 +1585,11 @@
                 "Augsburg",
                 "Adolf_Hitler"
             ],
+            "The_Amazing_Race_Australia": [
+                "The_Amazing_Race_Australia",
+                "Twitter_(identifier)",
+                "Adolf_Hitler"
+            ],
             "The_Chronicles_of_Narnia": [
                 "The_Chronicles_of_Narnia",
                 "World_War_II",
@@ -1465,6 +1630,11 @@
                 "William_Lyon_Mackenzie_King",
                 "Adolf_Hitler"
             ],
+            "Triple_deity": [
+                "Triple_deity",
+                "Carl_Jung",
+                "Adolf_Hitler"
+            ],
             "Tuscany": [
                 "Tuscany",
                 "Nazi_Germany",
@@ -1478,6 +1648,26 @@
             "University_of_California,_Berkeley": [
                 "University_of_California,_Berkeley",
                 "Native_Americans_in_the_United_States",
+                "Adolf_Hitler"
+            ],
+            "Varuna": [
+                "Varuna",
+                "Oath",
+                "Adolf_Hitler"
+            ],
+            "Vedic_scriptures": [
+                "Vedic_scriptures",
+                "UNESCO",
+                "Adolf_Hitler"
+            ],
+            "Videha": [
+                "Videha",
+                "Sparta",
+                "Adolf_Hitler"
+            ],
+            "Video_clip": [
+                "Video_clip",
+                "List_of_Internet_phenomena",
                 "Adolf_Hitler"
             ],
             "Virtual_camera_system": [
@@ -1508,6 +1698,11 @@
             "World_Wide_Web": [
                 "World_Wide_Web",
                 "Twitter",
+                "Adolf_Hitler"
+            ],
+            "Youtube": [
+                "Youtube",
+                "Documentary_film",
                 "Adolf_Hitler"
             ]
         },
@@ -1578,6 +1773,12 @@
                 "Zionism",
                 "Adolf_Hitler"
             ],
+            "Agni": [
+                "Agni",
+                "Deva_(Hinduism)",
+                "War",
+                "Adolf_Hitler"
+            ],
             "Air": [
                 "Air",
                 "International_Space_Station",
@@ -1586,6 +1787,12 @@
             ],
             "Ananyata": [
                 "Ananyata",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
+            "Angada": [
+                "Angada",
                 "Hinduism",
                 "Hindutva",
                 "Adolf_Hitler"
@@ -1624,6 +1831,18 @@
                 "Barry_Callaghan",
                 "Order_of_Canada",
                 "Vincent_Massey",
+                "Adolf_Hitler"
+            ],
+            "Bharata": [
+                "Bharata",
+                "Bharata_(term)",
+                "Esperanto",
+                "Adolf_Hitler"
+            ],
+            "Brahma": [
+                "Brahma",
+                "Triple_deity",
+                "Carl_Jung",
                 "Adolf_Hitler"
             ],
             "Buried_by_the_Buzzzz": [
@@ -1668,6 +1887,12 @@
                 "World_War_II",
                 "Adolf_Hitler"
             ],
+            "Corynesporina": [
+                "Corynesporina",
+                "Ascomycota",
+                "Cloning",
+                "Adolf_Hitler"
+            ],
             "Daniel_Lynn_Carroll": [
                 "Daniel_Lynn_Carroll",
                 "Hampden%E2%80%93Sydney_College",
@@ -1696,6 +1921,12 @@
                 "Don_Pearce_(cricketer)",
                 "Cricket",
                 "Second_World_War",
+                "Adolf_Hitler"
+            ],
+            "Durga": [
+                "Durga",
+                "Hinduism",
+                "Hindutva",
                 "Adolf_Hitler"
             ],
             "E8_Series_Shinkansen": [
@@ -1764,6 +1995,12 @@
                 "Catholic_Church",
                 "Adolf_Hitler"
             ],
+            "Ganesha": [
+                "Ganesha",
+                "Deva_(Hinduism)",
+                "War",
+                "Adolf_Hitler"
+            ],
             "George_E._Read": [
                 "George_E._Read",
                 "Medal_of_Honor",
@@ -1806,10 +2043,34 @@
                 "Empire_of_Japan",
                 "Adolf_Hitler"
             ],
+            "Gunsight_Pass_(Sawatch_Range,_Colorado)": [
+                "Gunsight_Pass_(Sawatch_Range,_Colorado)",
+                "Mountain_pass",
+                "Brenner_pass",
+                "Adolf_Hitler"
+            ],
             "Hajji_Babakhan,_Sistan_and_Baluchestan": [
                 "Hajji_Babakhan,_Sistan_and_Baluchestan",
                 "Persian_language",
                 "Rubaiyat_of_Omar_Khayyam",
+                "Adolf_Hitler"
+            ],
+            "Hanuman": [
+                "Hanuman",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
+            "Indra": [
+                "Indra",
+                "Deva_(Hinduism)",
+                "War",
+                "Adolf_Hitler"
+            ],
+            "Indrajit": [
+                "Indrajit",
+                "Crown_prince",
+                "Hirohito",
                 "Adolf_Hitler"
             ],
             "Introduction_to_genetics": [
@@ -1830,6 +2091,12 @@
                 "Mongoloid",
                 "Adolf_Hitler"
             ],
+            "Jambavan": [
+                "Jambavan",
+                "Krishna",
+                "Aleister_Crowley",
+                "Adolf_Hitler"
+            ],
             "James_Bigden": [
                 "James_Bigden",
                 "Association_footballer",
@@ -1840,6 +2107,12 @@
                 "Jane_Waters",
                 "Film_director",
                 "UNESCO",
+                "Adolf_Hitler"
+            ],
+            "Jatayu": [
+                "Jatayu",
+                "Hinduism",
+                "Hindutva",
                 "Adolf_Hitler"
             ],
             "Jere_Elliott": [
@@ -1896,10 +2169,34 @@
                 "Second_World_War",
                 "Adolf_Hitler"
             ],
+            "Kubera": [
+                "Kubera",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
+            "Kumbhakarna": [
+                "Kumbhakarna",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
             "Lake_Kankakee": [
                 "Lake_Kankakee",
                 "Kankakee_River",
                 "Native_Americans_in_the_United_States",
+                "Adolf_Hitler"
+            ],
+            "Lakshmana": [
+                "Lakshmana",
+                "India",
+                "Europe",
+                "Adolf_Hitler"
+            ],
+            "Lakshmi": [
+                "Lakshmi",
+                "Hinduism",
+                "Hindutva",
                 "Adolf_Hitler"
             ],
             "Lapara,_Purulia": [
@@ -1956,6 +2253,12 @@
                 "Second_World_War",
                 "Adolf_Hitler"
             ],
+            "Millennial_pause": [
+                "Millennial_pause",
+                "Video_clip",
+                "List_of_Internet_phenomena",
+                "Adolf_Hitler"
+            ],
             "Mohamed_Mnyaa": [
                 "Mohamed_Mnyaa",
                 "Member_of_Parliament",
@@ -1978,6 +2281,12 @@
                 "Museo_Francisco_%22Pancho%22_Coimbre",
                 "Ponce,_Puerto_Rico",
                 "Entrepreneurs",
+                "Adolf_Hitler"
+            ],
+            "Nala": [
+                "Nala",
+                "Mahabharata",
+                "Subhas_Chandra_Bose",
                 "Adolf_Hitler"
             ],
             "National_Bank_of_Solomon_Islands": [
@@ -2008,6 +2317,12 @@
                 "New_Ross",
                 "Irish_language",
                 "Scotland",
+                "Adolf_Hitler"
+            ],
+            "Nila": [
+                "Nila",
+                "Sesame_Street",
+                "The_New_York_Times",
                 "Adolf_Hitler"
             ],
             "Niurkis_Mora": [
@@ -2118,10 +2433,22 @@
                 "Head_of_state",
                 "Adolf_Hitler"
             ],
+            "Rama": [
+                "Rama",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
             "Raul_(footballer,_born_1985)": [
                 "Raul_(footballer,_born_1985)",
                 "Association_football",
                 "Feminism",
+                "Adolf_Hitler"
+            ],
+            "Ravana": [
+                "Ravana",
+                "Hinduism",
+                "Hindutva",
                 "Adolf_Hitler"
             ],
             "Robot_Man_(song)": [
@@ -2178,10 +2505,28 @@
                 "UNESCO",
                 "Adolf_Hitler"
             ],
+            "Shatrughna": [
+                "Shatrughna",
+                "Mahabharata",
+                "Subhas_Chandra_Bose",
+                "Adolf_Hitler"
+            ],
+            "Shiva": [
+                "Shiva",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
             "Shuri_Station": [
                 "Shuri_Station",
                 "Train_station",
                 "Milano_Centrale_railway_station",
+                "Adolf_Hitler"
+            ],
+            "Sita": [
+                "Sita",
+                "Videha",
+                "Sparta",
                 "Adolf_Hitler"
             ],
             "Siyavakhsh": [
@@ -2244,6 +2589,30 @@
                 "Rubaiyat_of_Omar_Khayyam",
                 "Adolf_Hitler"
             ],
+            "Sugriva": [
+                "Sugriva",
+                "Khmer_language",
+                "Berlin",
+                "Adolf_Hitler"
+            ],
+            "Surpanakha": [
+                "Surpanakha",
+                "Mandodari",
+                "Aryan",
+                "Adolf_Hitler"
+            ],
+            "Surya": [
+                "Surya",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
+            "Tara": [
+                "Tara",
+                "The_Amazing_Race_Australia",
+                "Twitter_(identifier)",
+                "Adolf_Hitler"
+            ],
             "The_George,_Dublin": [
                 "The_George,_Dublin",
                 "Dublin",
@@ -2258,6 +2627,12 @@
             ],
             "The_Seven_Deadly_Sins:_Grudge_of_Edinburgh": [
                 "The_Seven_Deadly_Sins:_Grudge_of_Edinburgh",
+                "Japanese_language",
+                "World_War_II",
+                "Adolf_Hitler"
+            ],
+            "Torii": [
+                "Torii",
                 "Japanese_language",
                 "World_War_II",
                 "Adolf_Hitler"
@@ -2286,6 +2661,30 @@
                 "Rubaiyat_of_Omar_Khayyam",
                 "Adolf_Hitler"
             ],
+            "Vali": [
+                "Vali",
+                "Sarmatians",
+                "Poland",
+                "Adolf_Hitler"
+            ],
+            "Vayu": [
+                "Vayu",
+                "Vedic_scriptures",
+                "UNESCO",
+                "Adolf_Hitler"
+            ],
+            "Vibhishana": [
+                "Vibhishana",
+                "Mandodari",
+                "Aryan",
+                "Adolf_Hitler"
+            ],
+            "Vishnu": [
+                "Vishnu",
+                "Hinduism",
+                "Hindutva",
+                "Adolf_Hitler"
+            ],
             "Web_crawler": [
                 "Web_crawler",
                 "World_Wide_Web",
@@ -2308,6 +2707,12 @@
                 "XDefiant",
                 "First-person_shooter",
                 "Wolfenstein_3D",
+                "Adolf_Hitler"
+            ],
+            "Yama": [
+                "Yama",
+                "Justice",
+                "Ernst_Kaltenbrunner",
                 "Adolf_Hitler"
             ],
             "Yamaha_AG175": [
@@ -2343,6 +2748,13 @@
                 "Government_of_Madhya_Pradesh",
                 "India",
                 "Europe",
+                "Adolf_Hitler"
+            ],
+            "Subahu": [
+                "Subahu",
+                "Sanskrit_language",
+                "Classical_language",
+                "Roman_Catholic_Church",
                 "Adolf_Hitler"
             ],
             "Tabulaephorus_murzini": [
@@ -2919,8 +3331,24 @@
                 "Acronym",
                 "Jesus"
             ],
+            "Amulet": [
+                "Amulet",
+                "Jesus"
+            ],
+            "BCE": [
+                "BCE",
+                "Jesus"
+            ],
             "Baptists_Together": [
                 "Baptists_Together",
+                "Jesus"
+            ],
+            "Bhakti": [
+                "Bhakti",
+                "Jesus"
+            ],
+            "Byzantine_Empire": [
+                "Byzantine_Empire",
                 "Jesus"
             ],
             "Byzantine_Greeks": [
@@ -2941,6 +3369,10 @@
             ],
             "Catholic_Church": [
                 "Catholic_Church",
+                "Jesus"
+            ],
+            "Common_Era": [
+                "Common_Era",
                 "Jesus"
             ],
             "Denmark": [
@@ -2967,12 +3399,28 @@
                 "English_Wikipedia",
                 "Jesus"
             ],
+            "Evil": [
+                "Evil",
+                "Jesus"
+            ],
             "Freedom_of_religion": [
                 "Freedom_of_religion",
                 "Jesus"
             ],
             "God": [
                 "God",
+                "Jesus"
+            ],
+            "Guru": [
+                "Guru",
+                "Jesus"
+            ],
+            "Homophobic": [
+                "Homophobic",
+                "Jesus"
+            ],
+            "Incarnation": [
+                "Incarnation",
                 "Jesus"
             ],
             "Indonesian_language": [
@@ -2983,8 +3431,24 @@
                 "Initialism",
                 "Jesus"
             ],
+            "Islamic_calligraphy": [
+                "Islamic_calligraphy",
+                "Jesus"
+            ],
             "Jesus": [
                 "Jesus",
+                "Jesus"
+            ],
+            "Justice": [
+                "Justice",
+                "Jesus"
+            ],
+            "Justin_Bieber": [
+                "Justin_Bieber",
+                "Jesus"
+            ],
+            "Kerala": [
+                "Kerala",
                 "Jesus"
             ],
             "Lightning": [
@@ -3001,6 +3465,10 @@
             ],
             "May_Day": [
                 "May_Day",
+                "Jesus"
+            ],
+            "Mendicancy": [
+                "Mendicancy",
                 "Jesus"
             ],
             "Middle_English": [
@@ -3021,6 +3489,10 @@
             ],
             "Profanity": [
                 "Profanity",
+                "Jesus"
+            ],
+            "Religion": [
+                "Religion",
                 "Jesus"
             ],
             "Romanian_Revival_architecture": [
@@ -3047,6 +3519,22 @@
                 "Sergio_Ramos",
                 "Jesus"
             ],
+            "Solar_deity": [
+                "Solar_deity",
+                "Jesus"
+            ],
+            "Sri_Vaishnavism": [
+                "Sri_Vaishnavism",
+                "Jesus"
+            ],
+            "Tawakkal_Mastan_Vali": [
+                "Tawakkal_Mastan_Vali",
+                "Jesus"
+            ],
+            "The_Amazing_Race_Australia_1": [
+                "The_Amazing_Race_Australia_1",
+                "Jesus"
+            ],
             "The_Beatles": [
                 "The_Beatles",
                 "Jesus"
@@ -3059,8 +3547,20 @@
                 "Tribunus",
                 "Jesus"
             ],
+            "Turin": [
+                "Turin",
+                "Jesus"
+            ],
             "Valentine%27s_Day": [
                 "Valentine%27s_Day",
+                "Jesus"
+            ],
+            "Wine": [
+                "Wine",
+                "Jesus"
+            ],
+            "Yoga": [
+                "Yoga",
                 "Jesus"
             ]
         },
@@ -3075,14 +3575,29 @@
                 "Nazism",
                 "Jesus"
             ],
+            "Agni": [
+                "Agni",
+                "Guru",
+                "Jesus"
+            ],
             "Alison_Krauss": [
                 "Alison_Krauss",
                 "The_Beatles",
                 "Jesus"
             ],
+            "Allah": [
+                "Allah",
+                "Islamic_calligraphy",
+                "Jesus"
+            ],
             "Anarchism_in_Argentina": [
                 "Anarchism_in_Argentina",
                 "May_Day",
+                "Jesus"
+            ],
+            "Ascomycota": [
+                "Ascomycota",
+                "Wine",
                 "Jesus"
             ],
             "Association_football": [
@@ -3105,9 +3620,29 @@
                 "Russian_orthography",
                 "Jesus"
             ],
+            "Bharata_(term)": [
+                "Bharata_(term)",
+                "Middle_English",
+                "Jesus"
+            ],
+            "Bitumen": [
+                "Bitumen",
+                "Middle_English",
+                "Jesus"
+            ],
+            "Brahma": [
+                "Brahma",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "Bucharest,_Romania": [
                 "Bucharest,_Romania",
                 "Romanian_Revival_architecture",
+                "Jesus"
+            ],
+            "Buddha": [
+                "Buddha",
+                "Mendicancy",
                 "Jesus"
             ],
             "Butterfly": [
@@ -3170,9 +3705,24 @@
                 "Denmark",
                 "Jesus"
             ],
+            "Ganesha": [
+                "Ganesha",
+                "Incarnation",
+                "Jesus"
+            ],
             "Handball": [
                 "Handball",
                 "Denmark",
+                "Jesus"
+            ],
+            "Hanuman": [
+                "Hanuman",
+                "Common_Era",
+                "Jesus"
+            ],
+            "Indra": [
+                "Indra",
+                "Indonesian_language",
                 "Jesus"
             ],
             "Internet": [
@@ -3205,9 +3755,34 @@
                 "Personal_pronoun",
                 "Jesus"
             ],
+            "Jatayu": [
+                "Jatayu",
+                "Kerala",
+                "Jesus"
+            ],
+            "Kali": [
+                "Kali",
+                "Evil",
+                "Jesus"
+            ],
+            "Krishna": [
+                "Krishna",
+                "BCE",
+                "Jesus"
+            ],
             "LGBT": [
                 "LGBT",
                 "Acronym",
+                "Jesus"
+            ],
+            "Lakshmana": [
+                "Lakshmana",
+                "Kerala",
+                "Jesus"
+            ],
+            "Lakshmi": [
+                "Lakshmi",
+                "Sri_Vaishnavism",
                 "Jesus"
             ],
             "List_of_former_United_Kingdom_Parliament_constituencies": [
@@ -3215,9 +3790,24 @@
                 "Second_Protectorate_Parliament",
                 "Jesus"
             ],
+            "Mandodari": [
+                "Mandodari",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Maricha": [
+                "Maricha",
+                "Guru",
+                "Jesus"
+            ],
             "Member_of_Parliament": [
                 "Member_of_Parliament",
                 "Initialism",
+                "Jesus"
+            ],
+            "Milan": [
+                "Milan",
+                "Turin",
                 "Jesus"
             ],
             "Moth": [
@@ -3225,9 +3815,19 @@
                 "Cat",
                 "Jesus"
             ],
+            "Nila_River": [
+                "Nila_River",
+                "Kerala",
+                "Jesus"
+            ],
             "Ogi%C5%84ski_family": [
                 "Ogi%C5%84ski_family",
                 "Eastern_Orthodox_Church",
+                "Jesus"
+            ],
+            "Parvati": [
+                "Parvati",
+                "Kerala",
                 "Jesus"
             ],
             "Persian_language": [
@@ -3245,9 +3845,64 @@
                 "Freedom_of_religion",
                 "Jesus"
             ],
+            "Post_Malone": [
+                "Post_Malone",
+                "Justin_Bieber",
+                "Jesus"
+            ],
+            "Rama": [
+                "Rama",
+                "Bhakti",
+                "Jesus"
+            ],
+            "Ravana": [
+                "Ravana",
+                "Kerala",
+                "Jesus"
+            ],
+            "Ruma": [
+                "Ruma",
+                "Byzantine_Empire",
+                "Jesus"
+            ],
             "Sales_tax": [
                 "Sales_tax",
                 "Denmark",
+                "Jesus"
+            ],
+            "Sanskrit": [
+                "Sanskrit",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Sanskrit_language": [
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Saraswati": [
+                "Saraswati",
+                "Kerala",
+                "Jesus"
+            ],
+            "Shatrughna": [
+                "Shatrughna",
+                "Kerala",
+                "Jesus"
+            ],
+            "Shinto": [
+                "Shinto",
+                "Religion",
+                "Jesus"
+            ],
+            "Shiva": [
+                "Shiva",
+                "Yoga",
+                "Jesus"
+            ],
+            "Sita": [
+                "Sita",
+                "Kerala",
                 "Jesus"
             ],
             "Stone": [
@@ -3260,14 +3915,44 @@
                 "Lightning",
                 "Jesus"
             ],
+            "Surya": [
+                "Surya",
+                "Solar_deity",
+                "Jesus"
+            ],
+            "The_Amazing_Race_Australia": [
+                "The_Amazing_Race_Australia",
+                "The_Amazing_Race_Australia_1",
+                "Jesus"
+            ],
+            "Torii": [
+                "Torii",
+                "Amulet",
+                "Jesus"
+            ],
             "United_States": [
                 "United_States",
                 "Freedom_of_religion",
                 "Jesus"
             ],
+            "Vali": [
+                "Vali",
+                "Tawakkal_Mastan_Vali",
+                "Jesus"
+            ],
+            "Vibhishana": [
+                "Vibhishana",
+                "Sri_Vaishnavism",
+                "Jesus"
+            ],
             "Village": [
                 "Village",
                 "God",
+                "Jesus"
+            ],
+            "Vishnu": [
+                "Vishnu",
+                "Yoga",
                 "Jesus"
             ],
             "Vorarlberg": [
@@ -3283,6 +3968,16 @@
             "Water": [
                 "Water",
                 "Egyptians",
+                "Jesus"
+            ],
+            "Yama": [
+                "Yama",
+                "Justice",
+                "Jesus"
+            ],
+            "Youtube": [
+                "Youtube",
+                "Homophobic",
                 "Jesus"
             ]
         },
@@ -3323,6 +4018,12 @@
                 "Russian_orthography",
                 "Jesus"
             ],
+            "Angada": [
+                "Angada",
+                "Sanskrit",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "Ashi_Productions": [
                 "Ashi_Productions",
                 "Japanese_language",
@@ -3333,6 +4034,12 @@
                 "Azvarcheh",
                 "Persian_language",
                 "Indonesian_language",
+                "Jesus"
+            ],
+            "Bharata": [
+                "Bharata",
+                "Bharata_(term)",
+                "Middle_English",
                 "Jesus"
             ],
             "Buried_by_the_Buzzzz": [
@@ -3359,6 +4066,12 @@
                 "Sergio_Ramos",
                 "Jesus"
             ],
+            "Corynesporina": [
+                "Corynesporina",
+                "Ascomycota",
+                "Wine",
+                "Jesus"
+            ],
             "Derry,_Desertserges": [
                 "Derry,_Desertserges",
                 "Irish_language",
@@ -3375,6 +4088,18 @@
                 "Don_Pearce_(cricketer)",
                 "Cricket",
                 "Sabbath",
+                "Jesus"
+            ],
+            "Durga": [
+                "Durga",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Emanuele_Ferrari": [
+                "Emanuele_Ferrari",
+                "Milan",
+                "Turin",
                 "Jesus"
             ],
             "Eunidia_batesi": [
@@ -3401,10 +4126,22 @@
                 "Catholic_Church",
                 "Jesus"
             ],
+            "Indrajit": [
+                "Indrajit",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "Ipswich_Town_F.C._Women": [
                 "Ipswich_Town_F.C._Women",
                 "Felixstowe",
                 "Baptists_Together",
+                "Jesus"
+            ],
+            "Jambavan": [
+                "Jambavan",
+                "Sanskrit_language",
+                "Indonesian_language",
                 "Jesus"
             ],
             "Jane_Waters": [
@@ -3413,10 +4150,28 @@
                 "Die_Hard",
                 "Jesus"
             ],
+            "Kubera": [
+                "Kubera",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Kumbhakarna": [
+                "Kumbhakarna",
+                "Sanskrit",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "Largo_Public_Library": [
                 "Largo_Public_Library",
                 "Sales_tax",
                 "Denmark",
+                "Jesus"
+            ],
+            "Millennial_pause": [
+                "Millennial_pause",
+                "Video_clip",
+                "Celebrity",
                 "Jesus"
             ],
             "Mohamed_Mnyaa": [
@@ -3431,6 +4186,12 @@
                 "English_Wikipedia",
                 "Jesus"
             ],
+            "Nala": [
+                "Nala",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "National_Register_of_Historic_Places_listings_in_Oregon": [
                 "National_Register_of_Historic_Places_listings_in_Oregon",
                 "United_States",
@@ -3441,6 +4202,12 @@
                 "Niewino_Pop%C5%82awskie",
                 "Village",
                 "God",
+                "Jesus"
+            ],
+            "Nila": [
+                "Nila",
+                "Nila_River",
+                "Kerala",
                 "Jesus"
             ],
             "Niurkis_Mora": [
@@ -3485,9 +4252,27 @@
                 "Romanian_Revival_architecture",
                 "Jesus"
             ],
+            "Subahu": [
+                "Subahu",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
             "Sufan-e_Olya": [
                 "Sufan-e_Olya",
                 "Persian_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Sugriva": [
+                "Sugriva",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Surpanakha": [
+                "Surpanakha",
+                "Sanskrit",
                 "Indonesian_language",
                 "Jesus"
             ],
@@ -3495,6 +4280,24 @@
                 "Tabulaephorus_murzini",
                 "Moth",
                 "Cat",
+                "Jesus"
+            ],
+            "Tara": [
+                "Tara",
+                "The_Amazing_Race_Australia",
+                "The_Amazing_Race_Australia_1",
+                "Jesus"
+            ],
+            "Varuna": [
+                "Varuna",
+                "Sanskrit_language",
+                "Indonesian_language",
+                "Jesus"
+            ],
+            "Vayu": [
+                "Vayu",
+                "Sanskrit_language",
+                "Indonesian_language",
                 "Jesus"
             ],
             "Web_crawler": [
