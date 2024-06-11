@@ -269,6 +269,7 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
         padding,
     )
     print()
+    return 1
 
 
 def print_info(
