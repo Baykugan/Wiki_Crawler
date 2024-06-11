@@ -616,20 +616,15 @@ def save_path(path: tuple[str]) -> None:
 
         if path[-1] not in data:
             data[path[-1]] = {}
-            data = {k: v for k, v in sorted(data.items(), key=lambda x: x[0])}
+            data = dict(sorted(data.items(), key=lambda x: x[0]))
         if path_length not in data[path[-1]]:
             data[path[-1]][path_length] = {}
-            data[path[-1]] = {
-                k: v for k, v in sorted(data[path[-1]].items(), key=lambda x: x[0])
-            }
+            data[path[-1]] = dict(sorted(data[path[-1]].items(), key=lambda x: x[0]))
         if path[0] not in data[path[-1]][path_length]:
             data[path[-1]][path_length][path[0]] = {}
-            data[path[-1]][path_length] = {
-                k: v
-                for k, v in sorted(
-                    data[path[-1]][path_length].items(), key=lambda x: x[0]
-                )
-            }
+            data[path[-1]][path_length] = dict(
+                sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
+            )
         else:
             logger.info(
                 "Path already saved: %s",
