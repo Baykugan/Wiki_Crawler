@@ -4,7 +4,7 @@ Wiki Crawler
 This script crawls from a start Wikipedia page to an end Wikipedia page.
 """
 
-#pylint: disable=line-too-long
+# pylint: disable=line-too-long
 
 import json
 import pathlib
@@ -22,8 +22,6 @@ from logger import logger
 PATH = pathlib.Path(__file__).parent.resolve()
 
 
-
-
 def progress_bar(progress: int, goal: int) -> str:
     """
     Returns a progress bar string.
@@ -34,28 +32,29 @@ def progress_bar(progress: int, goal: int) -> str:
     Returns:
         str: The progress bar string.
     """
-    pbar = {0: "          ",
-            1:  "▌         ",
-            2:  "█         ",
-            3:  "█▌        ",
-            4:  "██        ",
-            5:  "██▌       ",
-            6:  "███       ",
-            7:  "███▌      ",
-            8:  "████      ",
-            9:  "████▌     ",
-            10: "█████     ",
-            11: "█████▌    ",
-            12: "██████    ",
-            13: "██████▌   ",
-            14: "███████   ",
-            15: "███████▌  ",
-            16: "████████  ",
-            17: "████████▌ ",
-            18: "█████████ ",
-            19: "█████████▌",
-            20: "██████████",
-           }
+    pbar = {
+        0: "          ",
+        1: "▌         ",
+        2: "█         ",
+        3: "█▌        ",
+        4: "██        ",
+        5: "██▌       ",
+        6: "███       ",
+        7: "███▌      ",
+        8: "████      ",
+        9: "████▌     ",
+        10: "█████     ",
+        11: "█████▌    ",
+        12: "██████    ",
+        13: "██████▌   ",
+        14: "███████   ",
+        15: "███████▌  ",
+        16: "████████  ",
+        17: "████████▌ ",
+        18: "█████████ ",
+        19: "█████████▌",
+        20: "██████████",
+    }
 
     if progress > goal:
         return pbar[20]
@@ -63,9 +62,6 @@ def progress_bar(progress: int, goal: int) -> str:
         percent = round(progress / goal * 20)
 
     return "[" + pbar[percent] + "]"
-
-
-
 
 
 def get_random_page_title() -> str | None:
@@ -83,6 +79,7 @@ def get_random_page_title() -> str | None:
 
     logger.error("Failed to get random page title.")
     return None
+
 
 def extract_links(page_title: str) -> list[str] | int:
     """
@@ -169,30 +166,39 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
 
     remaining_ends = end_titles.copy()
     longest_end_title = len(max(end_titles, key=len))
-    padding = 14 + len(end_titles) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
-
+    padding = (
+        14
+        + len(end_titles)
+        + sum(len(path) + 2 for path in paths.values())
+        + (0 if paths else 1)
+    )
 
     print("\n" * padding + "\n", end="")
     while q and remaining_ends:
-
 
         path = q.get()
         if path[-1] in visited:
             continue
         visited.add(path[-1])
 
-
-        print_info(start_title,
-                   end_titles,
-                   path,
-                   paths,
-                   visited,
-                   start_time,
-                   remaining_ends,
-                   longest_end_title,
-                   padding
+        print_info(
+            start_title,
+            end_titles,
+            path,
+            paths,
+            visited,
+            start_time,
+            remaining_ends,
+            longest_end_title,
+            padding,
         )
-        padding = 14 + len(end_titles) + len(path) + sum(len(path) + 2 for path in paths.values()) + (0 if paths else 1)
+        padding = (
+            14
+            + len(end_titles)
+            + len(path)
+            + sum(len(path) + 2 for path in paths.values())
+            + (0 if paths else 1)
+        )
 
         if (links := extract_links(path[-1])) == 0:
             if q.empty():
@@ -251,29 +257,31 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                 remaining_ends.remove(link)
                 paths[str(len(visited)) + " " + link] = path + (link,)
 
-    print_info(start_title,
-               end_titles,
-               path,
-               paths,
-               visited,
-               start_time,
-               remaining_ends,
-               longest_end_title,
-               padding
+    print_info(
+        start_title,
+        end_titles,
+        path,
+        paths,
+        visited,
+        start_time,
+        remaining_ends,
+        longest_end_title,
+        padding,
     )
     print()
 
 
-def print_info(start_title: str,
-               end_titles: list[str],
-               path: tuple[str],
-               paths: dict[str, tuple[str]],
-               visited: set[str],
-               start_time: int,
-               remaining_ends: list[str],
-               longest_end_title: int,
-               padding: int
-    ) -> None:
+def print_info(
+    start_title: str,
+    end_titles: list[str],
+    path: tuple[str],
+    paths: dict[str, tuple[str]],
+    visited: set[str],
+    start_time: int,
+    remaining_ends: list[str],
+    longest_end_title: int,
+    padding: int,
+) -> None:
     """
     Prints the information about the crawl.
 
@@ -291,21 +299,28 @@ def print_info(start_title: str,
     line_length = 60
 
     def line_fill():
-        print("\033[2K" + "█"*line_length, end="")
+        print("\033[2K" + "█" * line_length, end="")
         time.sleep(0.01)
         print("\033[2K\r", end="")
 
     def print_info_path(path):
         for i, link in enumerate(path):
             line_fill()
-            print(ljust_ansi(f"│ {"╚═►" if i + 1 == len(path) else "╠═►"} {wiki_link(link)}", line_length - 1) + "│")
+            print(
+                ljust_ansi(
+                    f"│ {"╚═►" if i + 1 == len(path) else "╠═►"} {wiki_link(link)}",
+                    line_length - 1,
+                )
+                + "│"
+            )
 
     def ljust_ansi(s: str, width: int, fillchar: str = " ") -> str:
-        ansi_escape = re.compile(r'\033]8;;[\w\W]*?\033\\|\033\[38;2;255;0;0m|\033\[0m|\033\[38;2;0;255;0m|\033\[0m')
+        ansi_escape = re.compile(
+            r"\033]8;;[\w\W]*?\033\\|\033\[38;2;255;0;0m|\033\[0m|\033\[38;2;0;255;0m|\033\[0m"
+        )
         visible_length = len(ansi_escape.sub("", s))
         fill_length = max(0, width - visible_length)
         return s + (fillchar * fill_length)
-
 
     print("\033[F" * padding, "\r", sep="", end="")
     line_fill()
@@ -318,24 +333,45 @@ def print_info(start_title: str,
     print(ljust_ansi(f"│ Start: {wiki_link(start_title)}", line_length - 1) + "│")
     for i, end_title in enumerate(end_titles):
         line_fill()
-        print(ljust_ansi(f"│ End {i + 1}: {wiki_link(end_title)}{"".ljust(longest_end_title-len(end_title))}: {f"\033[38;2;255;0;0m{"X"}\033[0m" if end_title in remaining_ends else f"\033[38;2;0;255;0m{"✓"}\033[0m"}", line_length - 1) + "│")
-    print(f"│ [{len(end_titles) - len(remaining_ends)}/{len(end_titles)}]: {progress_bar(len(end_titles) - len(remaining_ends), len(end_titles))}".ljust(line_length - 1) + "│")
+        print(
+            ljust_ansi(
+                f"│ End {i + 1}: {wiki_link(end_title)}{"".ljust(longest_end_title-len(end_title))}: {f"\033[38;2;255;0;0m{"X"}\033[0m" if end_title in remaining_ends else f"\033[38;2;0;255;0m{"✓"}\033[0m"}",
+                line_length - 1,
+            )
+            + "│"
+        )
+    print(
+        f"│ [{len(end_titles) - len(remaining_ends)}/{len(end_titles)}]: {progress_bar(len(end_titles) - len(remaining_ends), len(end_titles))}".ljust(
+            line_length - 1
+        )
+        + "│"
+    )
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
     print(f"│ Articles searched: {len(visited)}".ljust(line_length - 1) + "│")
     line_fill()
-    print(f"│ Time taken: {timedelta(seconds=int(time.time() - start_time))}".ljust(line_length - 1) + "│")
+    print(
+        f"│ Time taken: {timedelta(seconds=int(time.time() - start_time))}".ljust(
+            line_length - 1
+        )
+        + "│"
+    )
     line_fill()
     print(
-        f"│ Time per article: {round((time.time() - start_time) / len(visited), 3)} seconds".ljust(line_length - 1) + "│"
+        f"│ Time per article: {round((time.time() - start_time) / len(visited), 3)} seconds".ljust(
+            line_length - 1
+        )
+        + "│"
     )
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
     print(f"╞═╗ Current depth: {len(path) - 1}".ljust(line_length - 1) + "│")
     line_fill()
-    print(ljust_ansi(f"│ ║ Current article: {wiki_link(path[-1])}", line_length - 1) + "│")
+    print(
+        ljust_ansi(f"│ ║ Current article: {wiki_link(path[-1])}", line_length - 1) + "│"
+    )
     line_fill()
     print_info_path(path)
     line_fill()
@@ -346,7 +382,13 @@ def print_info(start_title: str,
     for key, value in paths.items():
         counter += 1
         line_fill()
-        print(ljust_ansi(f"╞═╗ Path to {wiki_link(key.split(" ")[1])} (Searched {key.split(" ")[0]} articles):", line_length - 1) + "│")
+        print(
+            ljust_ansi(
+                f"╞═╗ Path to {wiki_link(key.split(" ")[1])} (Searched {key.split(" ")[0]} articles):",
+                line_length - 1,
+            )
+            + "│"
+        )
         line_fill()
         print_info_path(value)
         if counter < len(paths):
@@ -354,6 +396,7 @@ def print_info(start_title: str,
             print("│".ljust(line_length - 1) + "│")
     line_fill()
     print("└" + "─" * (line_length - 2) + "┘")
+
 
 def path_to_string(path: tuple[str]) -> str:
     """
@@ -453,7 +496,6 @@ def setup_path(
                 logger.info("Crawl number %s complete.", counter)
             print("\n")
 
-
     elif start_titles is None:
         logger.info("Setting up crawl(s) for %s random start titles.", iterations)
         for i in range(iterations):
@@ -487,10 +529,13 @@ def setup_path(
             print("\n")
 
     else:
-        logger.info("Setting up crawl(s) for %s start titles."
-                    "\n                                    "
-                    "%s",
-                    len(start_titles), start_titles)
+        logger.info(
+            "Setting up crawl(s) for %s start titles."
+            "\n                                    "
+            "%s",
+            len(start_titles),
+            start_titles,
+        )
 
         for start_title in start_titles:
             print(f"Crawl from {start_title}.")
@@ -519,7 +564,6 @@ def setup_path(
             print("\n")
 
 
-
 def wiki_link(title: str) -> str:
     """
     Returns the Wikipedia link for the title.
@@ -533,6 +577,7 @@ def wiki_link(title: str) -> str:
 
     return f"\x1b]8;;https://en.wikipedia.org/wiki/{title}\x1b\\{title}\x1b]8;;\x1b\\"
 
+
 def wiki_link_log(path: list[str] | tuple[str]) -> str:
     """
     Returns the Wikipedia links for the path.
@@ -544,10 +589,15 @@ def wiki_link_log(path: list[str] | tuple[str]) -> str:
         str: The Wikipedia links for the path.
     """
 
-    links = ["\n                                        " + f"https://en.wikipedia.org/wiki/{title}" for title in path]
-    link_str = "["+ ("".join(links)) + "\n                                    ]"
+    links = [
+        "\n                                        "
+        + f"https://en.wikipedia.org/wiki/{title}"
+        for title in path
+    ]
+    link_str = "[" + ("".join(links)) + "\n                                    ]"
 
     return link_str
+
 
 def save_path(path: tuple[str]) -> None:
     """
@@ -575,7 +625,9 @@ def save_path(path: tuple[str]) -> None:
             data[path[-1]][path_length][path[0]] = {}
             data[path[-1]][path_length] = {
                 k: v
-                for k, v in sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
+                for k, v in sorted(
+                    data[path[-1]][path_length].items(), key=lambda x: x[0]
+                )
             }
         else:
             logger.info(
@@ -584,7 +636,7 @@ def save_path(path: tuple[str]) -> None:
             )
             portalocker.unlock(file)
             return
-        
+
         data[path[-1]][path_length][path[0]] = path
 
         file.seek(0)
@@ -628,9 +680,10 @@ def main() -> None:
     if end_titles:
         pass
     else:
-        end_titles = ["Adolf_Hitler",
-                      "Jesus",
-                      ]
+        end_titles = [
+            "Adolf_Hitler",
+            "Jesus",
+        ]
 
     setup_path(start_titles, end_titles, iterations, continuous)
 
