@@ -134,15 +134,14 @@ def extract_links(page_title: str) -> list[str] | int:
 
             if not links:
                 logger.warning("No links found in %s.", url)
-                with open(PATH / "dead_ends.json", "r", encoding="UTF-8") as file:
+                with open(PATH / "dead_ends.json", "r+", encoding="UTF-8") as file:
                     portalocker.lock(file, portalocker.LOCK_EX)
                     data = json.load(file)
-                    portalocker.unlock(file)
 
-                if url not in data["dead_ends"]:
-                    data["dead_ends"].append(url)
+                    if url not in data["dead_ends"]:
+                        data["dead_ends"].append(url)
 
-                with open(PATH / "dead_ends.json", "w", encoding="UTF-8") as file:
+                    file.seek(0)
                     json.dump(data, file, indent=4)
                     portalocker.unlock(file)
                 return 0
@@ -402,47 +401,46 @@ def setup_path(
             counter += 1
             print(f"Crawl number {counter}.")
             logger.info("Crawl number %s.", counter)
-            with open(PATH / "queue.json", "r", encoding="UTF-8") as file:
-                portalocker.lock(file, portalocker.LOCK_SH)
-                data = json.load(file)
-                portalocker.unlock(file)
-            if start_titles is not None:
-                data["queue"] = start_titles + data["queue"]
-                start_titles = None
-            if data["queue"] != []:
-                start_title = data["queue"].pop(0)
-                logger.info(
-                    "-----------------------------------------"
-                    "\n                                    "
-                    "Setting up crawl from queue."
-                    "\n                                    "
-                    "Start title: %s"
-                    "\n                                    "
-                    "End titles: %s"
-                    "\n                                    "
-                    "-----------------------------------------",
-                    start_title,
-                    end_titles,
-                )
-
-            else:
-                start_title = get_random_page_title()
-                logger.info(
-                    "-----------------------------------------"
-                    "\n                                    "
-                    "Setting up crawl from random start title."
-                    "\n                                    "
-                    "Start title: %s"
-                    "\n                                    "
-                    "End titles: %s"
-                    "\n                                    "
-                    "-----------------------------------------",
-                    start_title,
-                    end_titles,
-                )
-
-            with open(PATH / "queue.json", "w", encoding="UTF-8") as file:
+            with open(PATH / "queue.json", "r+", encoding="UTF-8") as file:
                 portalocker.lock(file, portalocker.LOCK_EX)
+                data = json.load(file)
+
+                if start_titles is not None:
+                    data["queue"] = start_titles + data["queue"]
+                    start_titles = None
+                if data["queue"] != []:
+                    start_title = data["queue"].pop(0)
+                    logger.info(
+                        "-----------------------------------------"
+                        "\n                                    "
+                        "Setting up crawl from queue."
+                        "\n                                    "
+                        "Start title: %s"
+                        "\n                                    "
+                        "End titles: %s"
+                        "\n                                    "
+                        "-----------------------------------------",
+                        start_title,
+                        end_titles,
+                    )
+
+                else:
+                    start_title = get_random_page_title()
+                    logger.info(
+                        "-----------------------------------------"
+                        "\n                                    "
+                        "Setting up crawl from random start title."
+                        "\n                                    "
+                        "Start title: %s"
+                        "\n                                    "
+                        "End titles: %s"
+                        "\n                                    "
+                        "-----------------------------------------",
+                        start_title,
+                        end_titles,
+                    )
+
+                file.seek(0)
                 json.dump(data, file, indent=4)
                 portalocker.unlock(file)
 
@@ -560,41 +558,40 @@ def save_path(path: tuple[str]) -> None:
     """
 
     path_length = str(len(path))
-    save_loc = pathlib.Path(__file__).parent.resolve() / "paths.json"
 
-    with open(save_loc, "r", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_SH)
-        data = json.load(file)
-        portalocker.unlock(file)
-
-
-    if path[-1] not in data:
-        data[path[-1]] = {}
-        data = {k: v for k, v in sorted(data.items(), key=lambda x: x[0])}
-    if path_length not in data[path[-1]]:
-        data[path[-1]][path_length] = {}
-        data[path[-1]] = {
-            k: v for k, v in sorted(data[path[-1]].items(), key=lambda x: x[0])
-        }
-    if path[0] not in data[path[-1]][path_length]:
-        data[path[-1]][path_length][path[0]] = {}
-        data[path[-1]][path_length] = {
-            k: v
-            for k, v in sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
-        }
-    else:
-        logger.info(
-            "Path already saved: %s",
-            path,
-        )
-        return
-    data[path[-1]][path_length][path[0]] = path
-
-    logger.info("Path saved: %s", path)
-    with open(save_loc, "w", encoding="UTF-8") as file:
+    with open(PATH / "paths.json", "r+", encoding="UTF-8") as file:
         portalocker.lock(file, portalocker.LOCK_EX)
+        data = json.load(file)
+
+        if path[-1] not in data:
+            data[path[-1]] = {}
+            data = {k: v for k, v in sorted(data.items(), key=lambda x: x[0])}
+        if path_length not in data[path[-1]]:
+            data[path[-1]][path_length] = {}
+            data[path[-1]] = {
+                k: v for k, v in sorted(data[path[-1]].items(), key=lambda x: x[0])
+            }
+        if path[0] not in data[path[-1]][path_length]:
+            data[path[-1]][path_length][path[0]] = {}
+            data[path[-1]][path_length] = {
+                k: v
+                for k, v in sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
+            }
+        else:
+            logger.info(
+                "Path already saved: %s",
+                path,
+            )
+            portalocker.unlock(file)
+            return
+        
+        data[path[-1]][path_length][path[0]] = path
+
+        file.seek(0)
         json.dump(data, file, indent=4)
         portalocker.unlock(file)
+
+        logger.info("Path saved: %s", path)
 
     if len(path) >= 3:
         path = path[1:]
