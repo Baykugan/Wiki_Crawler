@@ -660,17 +660,14 @@ def main() -> None:
     end_titles = []
 
     print("\033[2J")
-    if input("Crawl continuously? (y/n): ").lower() == "y":
-        continuous = True
-    else:
-        continuous = False
+    continuous = input("Crawl continuously? (y/n): ").lower() == "y"
 
     while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
     while end_title := input("Enter end title: "):
         end_titles.append(end_title)
 
-    if len(start_titles) > 0:
+    if len(start_titles) > 0 or continuous:
         iterations = None
     else:
         start_titles = None
@@ -678,6 +675,7 @@ def main() -> None:
             iterations = int(iterations)
         else:
             iterations = 1
+
     if end_titles:
         pass
     else:
