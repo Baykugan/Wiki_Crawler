@@ -55,9 +55,6 @@ def share_starts(
     # Subtract the intersection from the union to get unique elements
     unique_elements = list(union_set - intersection_set)
 
-    
-
-
     with open(queue, "r+", encoding="UTF-8") as file:
         portalocker.lock(file, portalocker.LOCK_EX)
         queue = json.load(file)
@@ -82,6 +79,47 @@ def share_starts(
     print("Beginnings shared.")
     logger.info(
         "Beginnings shared."
+        "\n                                    "
+        "-----------------------------------------"
+    )
+
+
+def recheck_dead_ends():
+    """
+    This function adds the dead_ends to the beggining of the queue.json file.
+    """
+
+    print("\n\nRechecking dead ends...")
+    logger.info(
+        "-----------------------------------------"
+        "\n                                    "
+        "Rechecking dead ends..."
+    )
+
+    with open("dead_ends.json", "r", encoding="UTF-8") as file:
+        portalocker.lock(file, portalocker.LOCK_SH)
+        data = json.load(file)
+        portalocker.unlock(file)
+
+        dead_ends = data["dead_ends"]
+
+    dead_ends = [title[30:] for title in dead_ends]
+
+    with open("queue.json", "r+", encoding="UTF-8") as file:
+        portalocker.lock(file, portalocker.LOCK_EX)
+        queue = json.load(file)
+        for title in dead_ends:
+            if title in queue["queue"]:
+                queue["queue"].remove(title)
+            queue["queue"].insert(0, title)
+        file.seek(0)
+        json.dump(queue, file, indent=4)
+        file.truncate()
+        portalocker.unlock(file)
+
+    print("Dead ends rechecked.\n\n")
+    logger.info(
+        "Dead ends rechecked."
         "\n                                    "
         "-----------------------------------------"
     )

@@ -18,7 +18,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from logger import logger
-from queue_fillers import share_starts
+from queue_fillers import share_starts, recheck_dead_ends
 
 PATH = pathlib.Path(__file__).parent.resolve()
 
@@ -704,6 +704,9 @@ def main() -> None:
 
     print("\033[2J")
     continuous = input("Crawl continuously? (y/n): ").lower() == "y"
+
+    # if input("Recheck dead ends? (y/n): ").lower() == "y":
+    #     recheck_dead_ends()
 
     if input("Use default start and end titles? (y/n): ").lower() == "y":
         start_titles = None
