@@ -101,6 +101,15 @@ def extract_links(page_title: str) -> list[str] | int:
         None: If the request to the Wikipedia page fails.
     """
 
+    with open(PATH / "links.json", "r+", encoding="UTF-8") as file:
+        portalocker.lock(file, portalocker.LOCK_EX)
+        data = json.load(file)
+
+        if page_title in data:
+            logger.info("Links already extracted for %s.", page_title)
+            portalocker.unlock(file)
+            return data[page_title], False
+
     url = f"https://en.wikipedia.org/wiki/{page_title}"
     response = requests.get(url, timeout=100)
 
@@ -151,7 +160,23 @@ def extract_links(page_title: str) -> list[str] | int:
                     file.truncate()
                     portalocker.unlock(file)
                 return 0
-            return links
+
+            with open(PATH / "links.json", "r+", encoding="UTF-8") as file:
+                portalocker.lock(file, portalocker.LOCK_EX)
+                data = json.load(file)
+
+                data[page_title] = links
+
+                data = dict(sorted(data.items(), key=lambda x: x[0]))
+
+                file.seek(0)
+                json.dump(data, file, indent=4)
+                file.truncate()
+                portalocker.unlock(file)
+
+                logger.info("Links extracted for %s.", page_title)
+
+            return links, True
 
     logger.error("Failed to extract links from %s.", url)
     return 1
@@ -172,6 +197,7 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
     paths = {}
     q = Queue()
     q.put((start_title,))
+    new_articles = 0
 
     remaining_ends = end_titles.copy()
     longest_end_title = len(max(end_titles, key=len))
@@ -188,7 +214,6 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
         path = q.get()
         if path[-1] in visited:
             continue
-        visited.add(path[-1])
 
         print_info(
             start_title,
@@ -200,16 +225,18 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
             remaining_ends,
             longest_end_title,
             padding,
+            new_articles,
         )
         padding = (
-            14
+            15
             + len(end_titles)
             + len(path)
             + sum(len(path) + 2 for path in paths.values())
             + (0 if paths else 1)
         )
 
-        if (links := extract_links(path[-1])) == 0:
+        visited.add(path[-1])
+        if (result := extract_links(path[-1])) == 0:
             if q.empty():
                 logger.error(
                     "-----------------------------------------"
@@ -238,8 +265,11 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
 
             continue
 
-        elif links == 1:
+        elif result == 1:
             continue
+
+        links, new_article = result
+        new_articles += new_article
 
         for link in links:
             q.put(path + (link,))
@@ -276,6 +306,7 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
         remaining_ends,
         longest_end_title,
         padding,
+        new_articles,
     )
     print()
     return 1
@@ -291,6 +322,7 @@ def print_info(
     remaining_ends: list[str],
     longest_end_title: int,
     padding: int,
+    new_articles: int,
 ) -> None:
     """
     Prints the information about the crawl.
@@ -304,13 +336,15 @@ def print_info(
         start_time (int): The start time of the crawl.
         remaining_ends (list[str]): The list of remaining end titles.
         longest_end_title (int): The length of the longest end title.
+        padding (int): The padding for the print.
+        new_articles (int): The number of new articles found.
     """
 
     line_length = 60
 
     def line_fill():
         print("\033[2K" + "█" * line_length, end="")
-        time.sleep(0.01)
+        # time.sleep(0.01)
         print("\033[2K\r", end="")
 
     def print_info_path(path):
@@ -369,11 +403,13 @@ def print_info(
     )
     line_fill()
     print(
-        f"│ Time per article: {round((time.time() - start_time) / len(visited), 3)} seconds".ljust(
+        f"│ Time per article: {round((time.time() - start_time) / max(len(visited), 1), 3)} seconds".ljust(
             line_length - 1
         )
         + "│"
     )
+    line_fill()
+    print(f"│ New articles found: {new_articles}".ljust(line_length - 1) + "│")
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
