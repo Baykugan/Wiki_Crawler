@@ -21,6 +21,14 @@ from logger import logger
 
 PATH = pathlib.Path(__file__).parent.resolve()
 
+logger.info(
+    "-----------------------------------------"
+    "\n                                    "
+    "Wiki Crawler"
+    "\n                                    "
+    "-----------------------------------------"
+)
+
 
 def progress_bar(progress: int, goal: int) -> str:
     """
