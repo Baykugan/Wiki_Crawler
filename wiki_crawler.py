@@ -18,6 +18,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from logger import logger
+from queue_fillers import share_starts
 
 PATH = pathlib.Path(__file__).parent.resolve()
 
@@ -703,6 +704,17 @@ def main() -> None:
 
     print("\033[2J")
     continuous = input("Crawl continuously? (y/n): ").lower() == "y"
+
+    if input("Use default start and end titles? (y/n): ").lower() == "y":
+        start_titles = None
+        end_titles = ["Adolf_Hitler", "Jesus"]
+        if input("Fill queue with shared starts? (y/n): ").lower() == "y":
+            share_starts(
+                end_titles=end_titles,
+                paths=PATH / "paths.json",
+                queue=PATH / "queue.json",
+            )
+        setup_path(start_titles, end_titles, 1, continuous)
 
     while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
