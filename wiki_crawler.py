@@ -148,6 +148,7 @@ def extract_links(page_title: str) -> list[str] | int:
 
                     file.seek(0)
                     json.dump(data, file, indent=4)
+                    file.truncate()
                     portalocker.unlock(file)
                 return 0
             return links
@@ -494,6 +495,7 @@ def setup_path(
 
                 file.seek(0)
                 json.dump(data, file, indent=4)
+                file.truncate()
                 portalocker.unlock(file)
 
             exit_code = crawl(start_title, end_titles)
@@ -645,6 +647,7 @@ def save_path(path: tuple[str]) -> None:
 
         file.seek(0)
         json.dump(data, file, indent=4)
+        file.truncate()
         portalocker.unlock(file)
 
         logger.info("Path saved: %s", path)
