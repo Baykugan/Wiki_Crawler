@@ -31,7 +31,7 @@ logger.info(
 )
 
 
-def progress_bar(progress: int, goal: int) -> str:
+def progress_bar(progress: int, goal: int, bar_length: int = 27) -> str:
     """
     Returns a progress bar string.
 
@@ -41,36 +41,21 @@ def progress_bar(progress: int, goal: int) -> str:
     Returns:
         str: The progress bar string.
     """
-    pbar = {
-        0: "          ",
-        1: "▌         ",
-        2: "█         ",
-        3: "█▌        ",
-        4: "██        ",
-        5: "██▌       ",
-        6: "███       ",
-        7: "███▌      ",
-        8: "████      ",
-        9: "████▌     ",
-        10: "█████     ",
-        11: "█████▌    ",
-        12: "██████    ",
-        13: "██████▌   ",
-        14: "███████   ",
-        15: "███████▌  ",
-        16: "████████  ",
-        17: "████████▌ ",
-        18: "█████████ ",
-        19: "█████████▌",
-        20: "██████████",
-    }
+
+    bracketless_length = bar_length - 2
 
     if progress > goal:
-        return pbar[20]
-    else:
-        percent = round(progress / goal * 20)
+        return "[" + "█" * bracketless_length + "]"  # 100%
 
-    return "[" + pbar[percent] + "]"
+    percent = round(progress / goal * bracketless_length * 2)
+
+    full_blocks = percent // 2
+    half_block = percent % 2
+    empty_blocks = bracketless_length - full_blocks - (1 if half_block else 0)
+
+    return (
+        "[" + "█" * full_blocks + ("▌" if half_block else "") + " " * empty_blocks + "]"
+    )
 
 
 def get_random_page_title() -> str | None:
@@ -386,7 +371,7 @@ def print_info(
             + "│"
         )
     print(
-        f"│ [{len(end_titles) - len(remaining_ends)}/{len(end_titles)}]: {progress_bar(len(end_titles) - len(remaining_ends), len(end_titles))}".ljust(
+        f"│ [{len(end_titles) - len(remaining_ends)}/{len(end_titles)}]: {progress_bar(len(end_titles) - len(remaining_ends), len(end_titles), line_length - len(f"[{len(end_titles) - len(remaining_ends)}/{len(end_titles)}]") - 6)}".ljust(
             line_length - 1
         )
         + "│"
