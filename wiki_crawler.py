@@ -395,7 +395,7 @@ def print_info(
         + "│"
     )
     line_fill()
-    print(f"│ New articles found: {new_articles}".ljust(line_length - 1) + "│")
+    print(f"│ New articles searched: {new_articles}".ljust(line_length - 1) + "│")
     line_fill()
     print("├" + "─" * (line_length - 2) + "┤")
     line_fill()
