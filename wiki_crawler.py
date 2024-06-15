@@ -58,6 +58,39 @@ def progress_bar(progress: int, goal: int, bar_length: int = 27) -> str:
     )
 
 
+def request_wikipedia_page(url: str, timeout: int = 10) -> str | None:
+    """
+    Requests the Wikipedia page.
+
+    Args:
+        title (str): The title of the Wikipedia page.
+
+    Returns:
+        str: The content of the Wikipedia page.
+        None: If the request to the Wikipedia page fails.
+    """
+
+    try:
+        response = requests.get(url, timeout=200)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.ConnectTimeout:
+        logger.error("Connection timeout occurred.")
+        logger.error("Retrying in %s seconds.", timeout)
+        time.sleep(timeout)
+        logger.error("Retrying...")
+        return None
+    except requests.exceptions.HTTPError as http_err:
+        logger.error("HTTP error occurred: %s", http_err)
+        return None
+    except requests.exceptions.RetryError as retry_err:
+        logger.error("Retry error occurred: %s", retry_err)
+        return None
+    except Exception as err:
+        logger.error("An error occurred: %s", err)
+        raise err
+
+
 def get_random_page_title() -> str | None:
     """
     Retrieves the title of a random Wikipedia page.
@@ -67,7 +100,10 @@ def get_random_page_title() -> str | None:
         None: If the request to the random page fails.
     """
 
-    response = requests.get("https://en.wikipedia.org/wiki/Special:Random", timeout=100)
+    url = "https://en.wikipedia.org/wiki/Special:Random"
+    while not (response := request_wikipedia_page(url)):
+        pass
+
     if response.status_code == 200:
         return response.url.split("/")[-1]
 
@@ -97,7 +133,8 @@ def extract_links(page_title: str) -> list[str] | int:
             return data[page_title], False
 
     url = f"https://en.wikipedia.org/wiki/{page_title}"
-    response = requests.get(url, timeout=100)
+    while not (response := request_wikipedia_page(url)):
+        pass
 
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, "html.parser")
