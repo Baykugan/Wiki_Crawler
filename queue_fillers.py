@@ -1,7 +1,5 @@
 from logger import logger
-import json
-import pathlib
-import portalocker
+from dataio import DataIO
 
 logger.info(
     "-----------------------------------------"
@@ -12,17 +10,14 @@ logger.info(
 )
 
 
-def share_starts(
-    end_titles: list[str], paths: pathlib.Path, queue: pathlib.Path
-) -> None:
+def share_starts(data_io: DataIO, end_titles: list[str]) -> None:
     """
-    This function takes in a list of end_titles and filles queue.json
-    with the start_titles that is not shared by the end_titles.
+    This function adds the start titles without a complete
+    path to all end titles to the queue.json file.
 
     Args:
-        end_titles (list): A list of end_titles.
-        paths (pathlib.Path): The path to the paths.json file.
-        queue (pathlib.Path): The path to the queue.json file.
+        data_io (DataIO): The DataIO object to interact with the database.
+        end_titles (list[str]): The list of end titles to share the start titles with.
     """
 
     print("\n\nSharing beginnings...")
@@ -32,47 +27,14 @@ def share_starts(
         "Sharing beginnings..."
     )
 
-    with open(paths, "r", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_SH)
-        paths = json.load(file)
-        portalocker.unlock(file)
-
-    possible_start_titles = []
-
-    for end_title in end_titles:
-        if end_title in paths:
-            titles = []
-            for start_titles in paths[end_title].values():
-                titles += start_titles.keys()
-
-        possible_start_titles.append(set(titles))
-
-    union_set = set.union(*map(set, possible_start_titles))
-
-    # Find the intersection of all elements in the lists
-    intersection_set = set.intersection(*possible_start_titles)
-
-    # Subtract the intersection from the union to get unique elements
-    unique_elements = list(union_set - intersection_set)
-
-    with open(queue, "r+", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_EX)
-        queue = json.load(file)
-        old_queue_len = len(queue["queue"])
-        for title in unique_elements:
-            if title not in queue["queue"]:
-                queue["queue"].append(title)
-        new_queue_len = len(queue["queue"])
-        file.seek(0)
-        json.dump(queue, file, indent=4)
-        file.truncate()
-        portalocker.unlock(file)
+    old_queue_len = data_io.query_queue_length()
+    for title in data_io.query_non_complete_start_articles(end_titles):
+        data_io.insert_queue(title, 5)
+    new_queue_len = data_io.query_queue_length()
 
     print(f"New titles added to queue: {new_queue_len - old_queue_len}")
     logger.info(
-        "New titles added to queue: %s"
-        "\n                                    "
-        "-----------------------------------------",
+        "New titles added to queue: %s",
         new_queue_len - old_queue_len,
     )
 
@@ -84,9 +46,13 @@ def share_starts(
     )
 
 
-def recheck_dead_ends():
+def recheck_dead_ends(data_io: DataIO) -> None:
     """
-    This function adds the dead_ends to the beggining of the queue.json file.
+    This function adds the dead ends from the database
+    to the beginning of the queue.json file.
+
+    Args:
+        data_io (DataIO): The DataIO object to interact with the database.
     """
 
     print("\n\nRechecking dead ends...")
@@ -96,26 +62,16 @@ def recheck_dead_ends():
         "Rechecking dead ends..."
     )
 
-    with open("dead_ends.json", "r", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_SH)
-        data = json.load(file)
-        portalocker.unlock(file)
+    old_queue_len = data_io.query_queue_length()
+    for title in data_io.query_dead_ends():
+        data_io.insert_queue(title, 7)
+    new_queue_len = data_io.query_queue_length()
 
-        dead_ends = data["dead_ends"]
-
-    dead_ends = [title[30:] for title in dead_ends]
-
-    with open("queue.json", "r+", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_EX)
-        queue = json.load(file)
-        for title in dead_ends:
-            if title in queue["queue"]:
-                queue["queue"].remove(title)
-            queue["queue"].insert(0, title)
-        file.seek(0)
-        json.dump(queue, file, indent=4)
-        file.truncate()
-        portalocker.unlock(file)
+    print(f"New titles added to queue: {new_queue_len - old_queue_len}")
+    logger.info(
+        "New titles added to queue: %s",
+        new_queue_len - old_queue_len,
+    )
 
     print("Dead ends rechecked.\n\n")
     logger.info(
@@ -123,3 +79,5 @@ def recheck_dead_ends():
         "\n                                    "
         "-----------------------------------------"
     )
+
+

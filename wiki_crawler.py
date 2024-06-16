@@ -4,21 +4,22 @@ Wiki Crawler
 This script crawls from a start Wikipedia page to an end Wikipedia page.
 """
 
-import json
 import pathlib
 import re
 import time
 from datetime import timedelta
 from queue import Queue
 
-import portalocker
 import requests
 from bs4 import BeautifulSoup
 
 from logger import logger
+from dataio import DataIO
 from queue_fillers import share_starts, recheck_dead_ends
 
 PATH = pathlib.Path(__file__).parent.resolve()
+DATA = PATH / "DATA.db"
+DATAIO = DataIO(DATA, PATH)
 
 logger.info(
     "-----------------------------------------"
@@ -121,14 +122,9 @@ def extract_links(page_title: str) -> list[str] | int:
         None: If the request to the Wikipedia page fails.
     """
 
-    with open(PATH / "links.json", "r+", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_EX)
-        data = json.load(file)
-
-        if page_title in data:
-            logger.info("Links already extracted for %s.", page_title)
-            portalocker.unlock(file)
-            return data[page_title], False
+    if DATAIO.query_have_article_links(page_title):
+        query = DATAIO.query_article_links(page_title)
+        return query, False
 
     url = f"https://en.wikipedia.org/wiki/{page_title}"
     while not (response := request_wikipedia_page(url)):
@@ -169,33 +165,11 @@ def extract_links(page_title: str) -> list[str] | int:
 
             if not links:
                 logger.warning("No links found in %s.", url)
-                with open(PATH / "dead_ends.json", "r+", encoding="UTF-8") as file:
-                    portalocker.lock(file, portalocker.LOCK_EX)
-                    data = json.load(file)
-
-                    if url not in data["dead_ends"]:
-                        data["dead_ends"].append(url)
-
-                    file.seek(0)
-                    json.dump(data, file, indent=4)
-                    file.truncate()
-                    portalocker.unlock(file)
+                if not DATAIO.query_is_dead_end(page_title):
+                    DATAIO.insert_dead_end(page_title)
                 return 0
 
-            with open(PATH / "links.json", "r+", encoding="UTF-8") as file:
-                portalocker.lock(file, portalocker.LOCK_EX)
-                data = json.load(file)
-
-                data[page_title] = links
-
-                data = dict(sorted(data.items(), key=lambda x: x[0]))
-
-                file.seek(0)
-                json.dump(data, file, indent=4)
-                file.truncate()
-                portalocker.unlock(file)
-
-                logger.info("Links extracted for %s.", page_title)
+            DATAIO.insert_article_links(page_title, links)
 
             return links, True
 
@@ -313,7 +287,7 @@ def crawl(start_title: str, end_titles: list[str]) -> None | int:
                     timedelta(seconds=int(time.time() - start_time)),
                 )
 
-                save_path(path + (link,))
+                DATAIO.insert_path(path + (link,))
                 remaining_ends.remove(link)
                 paths[str(len(visited)) + " " + link] = path + (link,)
 
@@ -515,55 +489,49 @@ def setup_path(
             counter += 1
             print(f"Crawl number {counter}.")
             logger.info("Crawl number %s.", counter)
-            with open(PATH / "queue.json", "r+", encoding="UTF-8") as file:
-                portalocker.lock(file, portalocker.LOCK_EX)
-                data = json.load(file)
 
-                if start_titles is not None:
-                    data["queue"] = start_titles + data["queue"]
-                    start_titles = None
-                if data["queue"] != []:
-                    start_title = data["queue"].pop(0)
-                    logger.info(
-                        "-----------------------------------------"
-                        "\n                                    "
-                        "Setting up crawl from queue."
-                        "\n                                    "
-                        "Start title: %s"
-                        "\n                                    "
-                        "End titles: %s"
-                        "\n                                    "
-                        "-----------------------------------------",
-                        start_title,
-                        end_titles,
-                    )
 
-                else:
-                    start_title = get_random_page_title()
-                    logger.info(
-                        "-----------------------------------------"
-                        "\n                                    "
-                        "Setting up crawl from random start title."
-                        "\n                                    "
-                        "Start title: %s"
-                        "\n                                    "
-                        "End titles: %s"
-                        "\n                                    "
-                        "-----------------------------------------",
-                        start_title,
-                        end_titles,
-                    )
+            if start_titles is not None:
+                for start_title in start_titles:
+                    DATAIO.insert_queue(start_title, 9)
+            if DATAIO.query_queue_length() != 0:
+                start_title = DATAIO.query_queue()
+                logger.info(
+                    "-----------------------------------------"
+                    "\n                                    "
+                    "Setting up crawl from queue."
+                    "\n                                    "
+                    "Start title: %s"
+                    "\n                                    "
+                    "End titles: %s"
+                    "\n                                    "
+                    "-----------------------------------------",
+                    start_title,
+                    end_titles,
+                )
 
-                file.seek(0)
-                json.dump(data, file, indent=4)
-                file.truncate()
-                portalocker.unlock(file)
+            else:
+                start_title = get_random_page_title()
+                logger.info(
+                    "-----------------------------------------"
+                    "\n                                    "
+                    "Setting up crawl from random start title."
+                    "\n                                    "
+                    "Start title: %s"
+                    "\n                                    "
+                    "End titles: %s"
+                    "\n                                    "
+                    "-----------------------------------------",
+                    start_title,
+                    end_titles,
+                )
 
             exit_code = crawl(start_title, end_titles)
             if exit_code == 0:
                 print(f"Crawl number {counter} failed.")
                 logger.info("Crawl number %s failed.", counter)
             else:
+                DATAIO.remove_article_from_queue(start_title)
                 print(f"Crawl number {counter} complete.")
                 logger.info("Crawl number %s complete.", counter)
             print("\n")
@@ -671,53 +639,6 @@ def wiki_link_log(path: list[str] | tuple[str]) -> str:
     return link_str
 
 
-def save_path(path: tuple[str]) -> None:
-    """
-    Saves the path from the start title to the end title.
-
-    Args:
-        path (tuple[str]): The path from the start title to the end title.
-    """
-
-    path_length = str(len(path))
-
-    with open(PATH / "paths.json", "r+", encoding="UTF-8") as file:
-        portalocker.lock(file, portalocker.LOCK_EX)
-        data = json.load(file)
-
-        if path[-1] not in data:
-            data[path[-1]] = {}
-            data = dict(sorted(data.items(), key=lambda x: x[0]))
-        if path_length not in data[path[-1]]:
-            data[path[-1]][path_length] = {}
-            data[path[-1]] = dict(sorted(data[path[-1]].items(), key=lambda x: x[0]))
-        if path[0] not in data[path[-1]][path_length]:
-            data[path[-1]][path_length][path[0]] = {}
-            data[path[-1]][path_length] = dict(
-                sorted(data[path[-1]][path_length].items(), key=lambda x: x[0])
-            )
-        else:
-            logger.info(
-                "Path already saved: %s",
-                path,
-            )
-            portalocker.unlock(file)
-            return
-
-        data[path[-1]][path_length][path[0]] = path
-
-        file.seek(0)
-        json.dump(data, file, indent=4)
-        file.truncate()
-        portalocker.unlock(file)
-
-        logger.info("Path saved: %s", path)
-
-    if len(path) >= 3:
-        path = path[1:]
-        save_path(path)
-
-
 def main() -> None:
     """
     Main function.
@@ -730,23 +651,22 @@ def main() -> None:
     continuous = input("Crawl continuously? (y/n): ").lower() == "y"
 
     # if input("Recheck dead ends? (y/n): ").lower() == "y":
-    #     recheck_dead_ends()
+    #     recheck_dead_ends(DATAIO)
 
     if input("Use default start and end titles? (y/n): ").lower() == "y":
         start_titles = None
         end_titles = ["Adolf_Hitler", "Jesus"]
         if input("Fill queue with shared starts? (y/n): ").lower() == "y":
-            share_starts(
-                end_titles=end_titles,
-                paths=PATH / "paths.json",
-                queue=PATH / "queue.json",
-            )
+            share_starts(DATAIO, end_titles)
+        DATAIO.vacuum()
         setup_path(start_titles, end_titles, 1, continuous)
 
     while start_title := input("Enter the start title: "):
         start_titles.append(start_title)
     while end_title := input("Enter end title: "):
         end_titles.append(end_title)
+
+    DATAIO.vacuum()
 
     if len(start_titles) > 0 or continuous:
         iterations = None
