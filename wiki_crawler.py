@@ -16,10 +16,6 @@ from bs4 import BeautifulSoup
 from logger import logger
 from dataio import DataIO
 
-PATH = pathlib.Path(__file__).parent.resolve()
-DATA = PATH / "DATA.db"
-DATAIO = DataIO(DATA, PATH)
-
 logger.info(
     "-----------------------------------------"
     "\n                                    "
@@ -28,6 +24,9 @@ logger.info(
     "-----------------------------------------"
 )
 
+PATH = pathlib.Path(__file__).parent.resolve()
+DATA = PATH / "DATA.db"
+DATAIO = DataIO(DATA, PATH)
 
 def progress_bar(progress: int, goal: int, bar_length: int = 27) -> str:
     """
@@ -488,7 +487,6 @@ def setup_path(
             counter += 1
             print(f"Crawl number {counter}.")
             logger.info("Crawl number %s.", counter)
-
 
             if start_titles is not None:
                 for start_title in start_titles:
