@@ -15,7 +15,6 @@ from bs4 import BeautifulSoup
 
 from logger import logger
 from dataio import DataIO
-from queue_fillers import share_starts, recheck_dead_ends
 
 PATH = pathlib.Path(__file__).parent.resolve()
 DATA = PATH / "DATA.db"
@@ -651,13 +650,13 @@ def main() -> None:
     continuous = input("Crawl continuously? (y/n): ").lower() == "y"
 
     # if input("Recheck dead ends? (y/n): ").lower() == "y":
-    #     recheck_dead_ends(DATAIO)
+    #     DATAIO.recheck_dead_ends()
 
     if input("Use default start and end titles? (y/n): ").lower() == "y":
         start_titles = None
         end_titles = ["Adolf_Hitler", "Jesus"]
         if input("Fill queue with shared starts? (y/n): ").lower() == "y":
-            share_starts(DATAIO, end_titles)
+            DATAIO.share_start_articles(end_titles)
         DATAIO.vacuum()
         setup_path(start_titles, end_titles, 1, continuous)
 

@@ -689,3 +689,34 @@ class DataIO:
         result = c.fetchone()[0]
         c.close()
         return result
+
+    #########################
+    ##### Queue Fillers #####
+    #########################
+
+    def share_start_articles(self, end_titles: list[str]) -> None:
+        """
+        This function adds the start titles without a complete
+        path to all end titles to the queue with a priority of 5
+        """
+
+        for title in self.query_non_complete_start_articles(end_titles):
+            self.insert_queue(title, 5)
+
+    def recheck_dead_ends(self) -> None:
+        """
+        This function adds the dead ends from the database
+        to the queue with a priority of 7.
+        """
+
+        for title in self.query_dead_ends():
+            self.insert_queue(title, 7)
+
+    def recheck_start_articels(self) -> None:
+        """
+        This function adds the start articles from
+        the database to the queue with a priority of 0.
+        """
+
+        for title in self.query_start_articles():
+            self.insert_queue(title, 0)
