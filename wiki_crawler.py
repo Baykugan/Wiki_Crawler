@@ -402,7 +402,7 @@ def print_info(
         line_fill()
         print(
             ljust_ansi(
-                f"│ End {i + 1}: {wiki_link(end_title)}{"".ljust(longest_end_title-len(end_title))}: {f"\033[38;2;255;0;0m{"X"}\033[0m" if end_title in remaining_ends else f"\033[38;2;0;255;0m{"✓"}\033[0m"}",
+                f"│ End {i + 1}: {wiki_link(end_title)}{"".ljust(longest_end_title-len(end_title))}: {"\033[38;2;255;0;0mX\033[0m" if end_title in remaining_ends else "\033[38;2;0;255;0m✓\033[0m"}",
                 line_length - 1,
             )
             + "│"
