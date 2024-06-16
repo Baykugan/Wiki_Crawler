@@ -4,8 +4,6 @@ Wiki Crawler
 This script crawls from a start Wikipedia page to an end Wikipedia page.
 """
 
-# pylint: disable=line-too-long
-
 import json
 import pathlib
 import re
@@ -389,6 +387,8 @@ def print_info(
         fill_length = max(0, width - visible_length)
         return s + (fillchar * fill_length)
 
+    # pylint: disable=line-too-long
+
     print("\033[F" * padding, "\r", sep="", end="")
     line_fill()
     print("┌" + "─" * (line_length - 2) + "┐")
@@ -465,6 +465,8 @@ def print_info(
             print("│".ljust(line_length - 1) + "│")
     line_fill()
     print("└" + "─" * (line_length - 2) + "┘")
+
+    # pylint: enable=line-too-long
 
 
 def path_to_string(path: tuple[str]) -> str:
