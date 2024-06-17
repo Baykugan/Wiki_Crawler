@@ -1,5 +1,7 @@
 """
-DataIO class for handling database operations.
+DataIO
+======
+This module contains the DataIO class for handling database operations.
 """
 
 import time
