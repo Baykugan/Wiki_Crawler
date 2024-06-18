@@ -644,7 +644,7 @@ def main() -> None:
     start_titles = []
     end_titles = []
 
-    print("\033[2J")
+    print("\033[2J\033[H")
     continuous = input("Crawl continuously? (y/n): ").lower() == "y"
 
     # if input("Recheck dead ends? (y/n): ").lower() == "y":
